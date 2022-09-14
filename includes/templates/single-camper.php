@@ -139,47 +139,60 @@ get_header(); ?>
 										</span>
 									</span>
 
-									<?php if ( $camper_details_conditioned !='' ) {  ?>
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'Air conditioning', 'camper-single', 'mybooking-campers' ) ?>
-											<span class="dashicons dashicons-saved"></span>
+											<?php if ( $camper_details_conditioned == 'yes' ) {  ?>
+												<span class="dashicons dashicons-yes"></span>
+											<?php } else { ?>
+											  <span class="dashicons dashicons-no"></span>
+											<?php } ?>
 										</span>
-									<?php } ?>
 
-									<?php if ( $camper_details_shower !='' ) {  ?>
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'Shower', 'camper-single', 'mybooking-campers' ) ?>
-											<span class="dashicons dashicons-saved"></span>
+											<?php if ( $camper_details_shower == 'yes' ) {  ?>
+												<span class="dashicons dashicons-yes"></span>
+											<?php } else { ?>
+											  <span class="dashicons dashicons-no"></span>
+											<?php } ?>
 										</span>
-									<?php } ?>
 
-									<?php if ( $camper_details_hob !='' ) {  ?>
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'Hob', 'camper-single', 'mybooking-campers' ) ?>
-											<span class="dashicons dashicons-saved"></span>
+											<?php if ( $camper_details_hob == 'yes' ) {  ?>
+												<span class="dashicons dashicons-yes"></span>
+											<?php } else { ?>
+											  <span class="dashicons dashicons-no"></span>
+											<?php } ?>
 										</span>
-									<?php } ?>
 
-									<?php if ( $camper_details_sink !='' ) {  ?>
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'Sink', 'camper-single', 'mybooking-campers' ) ?>
-											<span class="dashicons dashicons-saved"></span>
+											<?php if ( $camper_details_sink == 'yes' ) {  ?>
+												<span class="dashicons dashicons-yes"></span>
+											<?php } else { ?>
+											  <span class="dashicons dashicons-no"></span>
+											<?php } ?>
 										</span>
-									<?php } ?>
 
-									<?php if ( $camper_details_toilet !='' ) {  ?>
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'Toilet', 'camper-single', 'mybooking-campers' ) ?>
-											<span class="dashicons dashicons-saved"></span>
+											<?php if ( $camper_details_toilet == 'yes' ) {  ?>
+												<span class="dashicons dashicons-yes"></span>
+											<?php } else { ?>
+											  <span class="dashicons dashicons-no"></span>
+											<?php } ?>
 										</span>
-									<?php } ?>
 
-									<?php if ( $camper_details_tv !='' ) {  ?>
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'TV', 'camper-single', 'mybooking-campers' ) ?>
-											<span class="dashicons dashicons-saved"></span>
+											<?php if ( $camper_details_tv == 'yes' ) {  ?>
+												<span class="dashicons dashicons-yes"></span>
+											<?php } else { ?>
+											  <span class="dashicons dashicons-no"></span>
+											<?php } ?>
 										</span>
-									<?php } ?>
+
 								</div>
 							</div>
 

@@ -549,7 +549,14 @@
 
 .mybooking-campers_details-list .dashicons {
   font-size: 25px;
-  color: var(--mb-success-color);
+}
+
+.mybooking-campers_details-list .dashicons.dashicons-yes {
+  color:  var(--mb-success-color);
+}
+
+.mybooking-campers_details-list .dashicons.dashicons-no {
+  color:  var(--mb-danger-color);
 }
 
 .mybooking-campers_details .dashicons {
