@@ -5,22 +5,22 @@
  * @since 1.0.1
  */
 
-   /* Add metabox
-   */
-   function add_camper_metabox() {
-     $screens = [ 'camper' ];
-     foreach ( $screens as $screen ) {
-       add_meta_box(
-          'camper-details',                                               // Unique ID
-          _x( 'Camper Details', 'camper-metabox', 'mybooking-campers' ),   // Box title
-          'camper_deatils_box',                                           // Content callback, must be of type callable
-          $screen,                                                        // Post type
-          'advanced',                                                     // Position; normal, advanced or side
-          'core',                                                         // Priority
-       );
-     }
-   }
-   add_action( 'add_meta_boxes', 'add_camper_metabox' );
+  /* Add metabox
+  */
+  function add_camper_metabox() {
+    $screens = [ 'camper' ];
+    foreach ( $screens as $screen ) {
+      add_meta_box(
+        'camper-details',                                               // Unique ID
+        _x( 'Camper Details', 'camper-metabox', 'mybooking-campers' ),  // Box title
+        'camper_deatils_box',                                           // Content callback, must be of type callable
+        $screen,                                                        // Post type
+        'advanced',                                                     // Position; normal, advanced or side
+        'core',                                                         // Priority
+      );
+    }
+  }
+  add_action( 'add_meta_boxes', 'add_camper_metabox' );
 
 
   /* Add fields
@@ -424,7 +424,7 @@
             <input
               type="checkbox"
               name="camper-details-conditioned"
-              value="Air conditioning" <?php echo $camper_details_conditioned_checked; ?>
+              value="yes" <?php echo $camper_details_conditioned_checked; ?>
               id="camper-details-conditioned"
               class="components-text-control__input">
               <?php echo esc_html_x( 'Air conditioning', 'camper-single', 'mybooking-campers' ) ?></label>
@@ -649,65 +649,103 @@
       );
     }
 
-    // Conditioned
-    if (  array_key_exists( 'camper-details-conditioned', $_POST )  ) {
-      $camper_conditioned = sanitize_text_field( $_POST['camper-details-conditioned'] );
+    // -- Extras
+
+    // Air Conditioning
+    if (  isset( $_POST[ 'camper-details-conditioned' ] )  ) {
       update_post_meta(
         $camper_data_id,
         'camper-details-conditioned',
-        $camper_conditioned
+        'yes'
+      );
+    }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-conditioned',
+        ''
       );
     }
 
     // Shower
-    if (  array_key_exists( 'camper-details-shower', $_POST )  ) {
-      $camper_shower = sanitize_text_field( $_POST['camper-details-shower'] );
+    if (  isset( $_POST[ 'camper-details-shower' ] )  ) {
       update_post_meta(
         $camper_data_id,
         'camper-details-shower',
-        $camper_shower
+        'yes'
       );
     }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-shower',
+        ''
+      );
+    }    
 
     // Hob
-    if (  array_key_exists( 'camper-details-hob', $_POST )  ) {
-      $camper_hob = sanitize_text_field( $_POST['camper-details-hob'] );
+    if (  isset( $_POST[ 'camper-details-hob' ] )  ) {
       update_post_meta(
         $camper_data_id,
         'camper-details-hob',
-        $camper_hob
+        'yes'
       );
     }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-hob',
+        ''
+      );
+    }      
 
     // Sink
-    if (  array_key_exists( 'camper-details-sink', $_POST )  ) {
-      $camper_sink = sanitize_text_field( $_POST['camper-details-sink'] );
+    if (  isset( $_POST[ 'camper-details-sink' ] )  ) {
       update_post_meta(
         $camper_data_id,
         'camper-details-sink',
-        $camper_sink
+        'yes'
       );
     }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-sink',
+        ''
+      );
+    }      
 
     // Toilet
-    if (  array_key_exists( 'camper-details-toilet', $_POST )  ) {
-      $camper_toilet = sanitize_text_field( $_POST['camper-details-toilet'] );
+    if (  isset( $_POST[ 'camper-details-toilet' ] )  ) {
       update_post_meta(
         $camper_data_id,
         'camper-details-toilet',
-        $camper_toilet
+        'yes'
       );
     }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-toilet',
+        ''
+      );
+    }     
 
     // TV
-    if (  array_key_exists( 'camper-details-tv', $_POST )  ) {
-      $camper_tv = sanitize_text_field( $_POST['camper-details-tv'] );
+    if (  isset( $_POST[ 'camper-details-tv' ] )  ) {
       update_post_meta(
         $camper_data_id,
         'camper-details-tv',
-        $camper_tv
+        'yes'
       );
     }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-tv',
+        ''
+      );
+    } 
 
     // Camper ID
     if (  array_key_exists( 'camper-details-id', $_POST )  ) {
