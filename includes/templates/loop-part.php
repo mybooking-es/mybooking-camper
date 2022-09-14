@@ -1,0 +1,102 @@
+<?php
+/**
+*		camperS LOOP PART
+*  	---------------
+*
+* 	@version 0.0.1
+*   @package WordPress
+*   @subpackage Mybooking campers Plugin
+*   @since 1.0.3
+*/
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+?>
+
+<!-- Gets custom fields data -->
+<?php
+  $camper_details_brand = get_post_meta( $post->ID, 'camper-details-brand', true );
+  $camper_details_model = get_post_meta( $post->ID, 'camper-details-model', true );
+  $camper_details_price = get_post_meta( $post->ID, 'camper-details-price', true );
+  $camper_details_places = get_post_meta( $post->ID, 'camper-details-places', true );
+	$camper_details_beds = get_post_meta( $post->ID, 'camper-details-beds', true );
+  $camper_details_fuel = get_post_meta( $post->ID, 'camper-details-fuel', true );
+  $camper_details_gear = get_post_meta( $post->ID, 'camper-details-gear', true );
+?>
+
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+  <?php $mybooking_permalink = get_permalink(); ?>
+
+  <!-- Card content -->
+  <div class="mybooking-campers_card">
+
+    <div class="mybooking-campers_card-image">
+      <div class="mybooking-campers_card-image-container">
+        <?php the_post_thumbnail(); ?>
+      </div>
+    </div>
+
+    <div class="mybooking-campers_card-body">
+
+      <!-- Categories -->
+
+      <?php if ( get_post_type( get_the_ID() ) == 'camper' ) { ?>
+        <?php $camper_taxonomy = get_the_terms( get_the_ID(), 'campers' ); ?>
+        <?php if ( isset( $camper_taxonomy ) && !empty( $camper_taxonomy ) ) { ?>
+          <div class="mybooking-campers_card-category">
+            <?php foreach ( $camper_taxonomy as $camper_tax ) { ?>
+              <span class="mybooking-campers_card-category-item"><?php echo esc_html( $camper_tax->name ); ?></span>
+            <?php } ?>
+          </div>
+        <?php } ?>
+      <?php }?>
+
+
+      <?php if ( $camper_details_brand !='' || $camper_details_model !='' ) {  ?>
+        <div class="mybooking-campers_card-title">
+          <?php echo esc_html( $camper_details_brand ) ?> <?php echo esc_html( $camper_details_model ) ?>
+        </div>
+      <?php } ?>
+
+      <?php if ( $camper_details_price !='' ) {  ?>
+        <div class="mybooking-campers_card-price">
+          <?php echo esc_html( $camper_details_price ) ?> €
+        </div>
+      <?php } ?>
+
+      <!-- Details -->
+      <div class="mybooking-campers_details">
+        <?php if ( $camper_details_places !='' ) {  ?>
+          <span class="mybooking-campers_characteristic">
+            <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/places.svg'; ?>">
+            <?php echo esc_html( $camper_details_places ) ?>
+          </span>
+        <?php } ?>
+
+        <?php if ( $camper_details_beds !='' ) {  ?>
+          <span class="mybooking-campers_characteristic">
+            <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/beds.svg'; ?>">
+            <?php echo esc_html( $camper_details_beds ) ?>
+          </span>
+        <?php } ?>
+
+        <?php if ( $camper_details_fuel !='' ) {  ?>
+          <span class="mybooking-campers_characteristic">
+            <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/fuel.svg'; ?>">
+            <?php echo esc_html( $camper_details_fuel ) ?>
+          </span>
+        <?php } ?>
+
+        <?php if ( $camper_details_gear !='' ) {  ?>
+          <span class="mybooking-campers_characteristic">
+            <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/transmission.svg'; ?>">
+            <?php echo esc_html( $camper_details_gear ) ?>
+          </span>
+        <?php } ?>
+      </div>
+
+      <!-- Read more -->
+      <button class="button btn btn-choose-product mybooking-campers_btn-book" href="<?php the_permalink(); ?>"><?php echo esc_html_x('Details', 'renting_choose_product', 'mybooking-camper') ?></span></button>
+    </div>
+  </div>
+</article>
