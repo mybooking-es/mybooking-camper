@@ -16,6 +16,15 @@ get_header(); ?>
 
 <!-- Gets custom fields data -->
 <?php
+  $camper_details_gallery = get_post_meta( $post->ID, 'camper-details-gallery-data', true );
+	if ( isset( $camper_details_gallery ) && !empty( $camper_details_gallery ) ) {
+		$camper_details_photos_url_array = $camper_details_gallery['image_url'];
+	}
+	else {
+		$camper_details_photos_url_array = [];
+	}
+	
+	$camper_details_photos_count = sizeof($camper_details_photos_url_array);  
 	$camper_details_price = get_post_meta( $post->ID, 'camper-details-price', true );
 	$camper_details_brand = get_post_meta( $post->ID, 'camper-details-brand', true );
 	$camper_details_model = get_post_meta( $post->ID, 'camper-details-model', true );
@@ -76,6 +85,12 @@ get_header(); ?>
 							<?php } ?>
 
 							<div class="mybooking-campers_post-subheader">
+								<!-- The images -->
+								<?php for( $i=0; $i<$camper_details_photos_count; $i++ ) { ?>		
+								   <div class="img_single_box">
+								      <img class="gallery-img" src="<?php echo $camper_details_photos_url_array[$i]; ?>" alt=""/>
+								   </div>	
+								<?php } ?>
 								<!-- The characteristics -->
 								<div class="mybooking-campers_details">
 									<?php if ( $camper_details_places !='' ) {  ?>
@@ -207,7 +222,7 @@ get_header(); ?>
 
 									<?php if ( $camper_details_lenght !='' ) {  ?>
 										<span class="mb-list-item">
-											<span><?php echo esc_html_x( 'Vehicle lenght', 'camper-single', 'mybooking-campers' ) ?></span>
+											<span><?php echo esc_html_x( 'Vehicle length', 'camper-single', 'mybooking-campers' ) ?></span>
 											<?php echo esc_html( $camper_details_lenght ) ?>
 										</span>
 									<?php } ?>
