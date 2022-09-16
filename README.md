@@ -5,6 +5,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A simple plugin for generating Mybooking camper custom post type
 
+IMPORTANT: this plugin depends on Mybooking Reservation Engine
+
 ## Description
 Simple custom post type for create camper fleets and pages with booking calendar. You need an active account on Mybooking and a proper invertory.
 
