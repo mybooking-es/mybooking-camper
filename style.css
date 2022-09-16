@@ -452,9 +452,9 @@
 } @media ( min-width: 575.98px ) {
   .mybooking-campers_post-header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
   }
 }
 
@@ -516,6 +516,28 @@
 
 .mybooking-campers_characteristic-icon {
   max-width: 30px;
+}
+
+/* Carousel */
+.mybooking-campers_carousel {
+  padding-bottom: 3rem;
+}
+
+.mybooking-campers_carousel-img {
+  border-radius: 5px;
+}
+
+.mybooking-campers_carousel .slick-dots {
+  bottom: 1rem;
+}
+
+.mybooking-campers_carousel .slick-dots li button::before {
+  font-size: 15px;
+  color: #666;
+}
+
+.mybooking-campers_carousel .slick-dots li.slick-active button::before {
+  color: var(--mb-accent-color);
 }
 
 /* Content */

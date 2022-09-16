@@ -23,8 +23,8 @@ get_header(); ?>
 	else {
 		$camper_details_photos_url_array = [];
 	}
-	
-	$camper_details_photos_count = sizeof($camper_details_photos_url_array);  
+
+	$camper_details_photos_count = sizeof($camper_details_photos_url_array);
 	$camper_details_price = get_post_meta( $post->ID, 'camper-details-price', true );
 	$camper_details_brand = get_post_meta( $post->ID, 'camper-details-brand', true );
 	$camper_details_model = get_post_meta( $post->ID, 'camper-details-model', true );
@@ -85,12 +85,7 @@ get_header(); ?>
 							<?php } ?>
 
 							<div class="mybooking-campers_post-subheader">
-								<!-- The images -->
-								<?php for( $i=0; $i<$camper_details_photos_count; $i++ ) { ?>		
-								   <div class="img_single_box">
-								      <img class="gallery-img" src="<?php echo $camper_details_photos_url_array[$i]; ?>" alt=""/>
-								   </div>	
-								<?php } ?>
+
 								<!-- The characteristics -->
 								<div class="mybooking-campers_details">
 									<?php if ( $camper_details_places !='' ) {  ?>
@@ -139,6 +134,17 @@ get_header(); ?>
 						<!-- The body -->
 
 						<div class="mb-col-md-8">
+
+              <!-- The images -->
+              <?php if( $camper_details_photos_count !='' ) { ?>
+                <div class="mybooking-campers_carousel mybooking-product-carousel-inner">
+                  <?php for( $i=0; $i<$camper_details_photos_count; $i++ ) { ?>
+                    <div class="mybooking-carousel-item">
+                      <img class="mybooking-campers_carousel-img" src="<?php echo $camper_details_photos_url_array[$i]; ?>" alt="Camper image"/>
+                    </div>
+                  <?php } ?>
+                </div>
+              <?php } ?>
 
 							<!-- Content -->
 							<div class="mybooking-campers_entry-content entry-content">
