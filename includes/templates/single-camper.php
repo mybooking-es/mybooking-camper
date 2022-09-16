@@ -53,7 +53,7 @@ get_header(); ?>
 
     <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
     	<div class="post_content mybooking-campers mybooking-campers_post">
-    		<div class="container" tabindex="-1">
+    		<div class="mb-container" tabindex="-1">
 
 					<!-- The header -->
 
@@ -268,17 +268,17 @@ get_header(); ?>
 										</span>
 									<?php } ?>
 
+                  <?php if ( $camper_details_gear !='' ) {  ?>
+										<span class="mb-list-item">
+											<span><?php echo esc_html_x( 'Gear type', 'camper-single', 'mybooking-campers' ) ?></span>
+											<?php echo esc_html( $camper_details_gear ) ?>
+										</span>
+									<?php } ?>
+
 									<?php if ( $camper_details_engine !='' ) {  ?>
 										<span class="mb-list-item">
 											<span><?php echo esc_html_x( 'Engine power', 'camper-single', 'mybooking-campers' ) ?></span>
 											<?php echo esc_html( $camper_details_engine ) ?>
-										</span>
-									<?php } ?>
-
-									<?php if ( $camper_details_gear !='' ) {  ?>
-										<span class="mb-list-item">
-											<span><?php echo esc_html_x( 'Gear type', 'camper-single', 'mybooking-campers' ) ?></span>
-											<?php echo esc_html( $camper_details_gear ) ?>
 										</span>
 									<?php } ?>
 

@@ -31,51 +31,64 @@
       $camper_gallery_data = get_post_meta( $camper_data->ID, 'camper-details-gallery-data', true );
       ?>
 
-      <div id="gallery_wrapper">
-          <div id="img_box_container">
-            <?php 
-              if ( isset( $camper_gallery_data['image_url'] ) ){
-                for( $i = 0; $i < count( $camper_gallery_data['image_url'] ); $i++ ){
+      <table class="form-table">
+      <tbody>
+        <tr>
+          <th scope="row">
+            <label for="camper-details-price"><?php echo esc_html_x( 'Image caruosel', 'camper-single', 'mybooking-campers' ) ?></label>
+          </th>
+          <td style="width: 45%;">
+            <div id="gallery_wrapper">
+              <div id="img_box_container">
+                <?php
+                  if ( isset( $camper_gallery_data['image_url'] ) ){
+                    for( $i = 0; $i < count( $camper_gallery_data['image_url'] ); $i++ ){
+                    ?>
+                    <div class="gallery_single_row dolu">
+                      <div class="gallery_area image_container ">
+                        <img class="gallery_img_img" src="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>
+                        <input type="hidden"
+                             class="meta_image_url"
+                             name="camper-details-gallery[image_url][]"
+                             value="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>"
+                          />
+                      </div>
+                      <div class="gallery_area">
+                        <span class="button remove" onclick="remove_img(this)" title="Remove"/><i class="dashicons dashicons-trash"></i></span>
+                      </div>
+                      <div class="clear">
+                      </div>
+                    </div>
+                    <?php
+                    }
+                  }
                 ?>
-                <div class="gallery_single_row dolu">
-                  <div class="gallery_area image_container ">
-                    <img class="gallery_img_img" src="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>
-                    <input type="hidden"
-                         class="meta_image_url"
-                         name="camper-details-gallery[image_url][]"
-                         value="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>"
-                      />
+              </div>
+              <div style="display:none" id="master_box">
+                <div class="gallery_single_row">
+                  <div class="gallery_area image_container" onclick="open_media_uploader_image(this)">
+                    <input class="meta_image_url" value="" type="hidden" name="camper-details-gallery[image_url][]" />
                   </div>
                   <div class="gallery_area">
                     <span class="button remove" onclick="remove_img(this)" title="Remove"/><i class="dashicons dashicons-trash"></i></span>
                   </div>
-                  <div class="clear">
-                  </div> 
+                  <div class="clear"></div>
                 </div>
-                <?php
-                }
-              }
-            ?>
-          </div>
-          <div style="display:none" id="master_box">
-            <div class="gallery_single_row">
-              <div class="gallery_area image_container" onclick="open_media_uploader_image(this)">
-                <input class="meta_image_url" value="" type="hidden" name="camper-details-gallery[image_url][]" />
-              </div> 
-              <div class="gallery_area"> 
-                <span class="button remove" onclick="remove_img(this)" title="Remove"/><i class="dashicons dashicons-trash"></i></span>
               </div>
-              <div class="clear"></div>
+              <div id="add_gallery_single_row">
+                <button class="button add" type="button" onclick="open_media_uploader_image_plus();" title="Add image"/>
+                  +
+                </button>
+              </div>
             </div>
-          </div>
-          <div id="add_gallery_single_row">
-            <button class="button add" type="button" onclick="open_media_uploader_image_plus();" title="Add image"/>
-              +
-            </button>
-          </div>
-      </div>
+          </td>
+          <td style="width: 45%;">
+            <p class="description"><?php echo esc_html_x( 'Add multiple images from your media library to create a carousel. Click and drag to change the order.', 'camper-single', 'mybooking-campers' ) ?></p>
+          </td>
+        </tr>
+      </table>
 
-    <?php  
+    <?php
       // Price field
       $camper_details_price = get_post_meta( $camper_data->ID, 'camper-details-price', true );
       ?>
@@ -419,44 +432,44 @@
 
     // Camper Extras
     $camper_details_conditioned = get_post_meta( $camper_data->ID, 'camper-details-conditioned', true );
-    if( $camper_details_conditioned == "yes") { 
-      $camper_details_conditioned_checked = 'checked="checked"'; 
+    if( $camper_details_conditioned == "yes") {
+      $camper_details_conditioned_checked = 'checked="checked"';
     } else {
       $camper_details_conditioned_checked = '';
     }
 
     $camper_details_shower = get_post_meta( $camper_data->ID, 'camper-details-shower', true );
-    if( $camper_details_shower == true ) { 
-      $camper_details_shower_checked = 'checked="checked"'; 
+    if( $camper_details_shower == true ) {
+      $camper_details_shower_checked = 'checked="checked"';
     }
     else {
       $camper_details_shower_checked = '';
     }
 
     $camper_details_hob = get_post_meta( $camper_data->ID, 'camper-details-hob', true );
-    if( $camper_details_hob == "yes") { 
-      $camper_details_hob_checked = 'checked="checked"'; 
+    if( $camper_details_hob == "yes") {
+      $camper_details_hob_checked = 'checked="checked"';
     } else {
       $camper_details_hob_checked = '';
     }
 
     $camper_details_sink = get_post_meta( $camper_data->ID, 'camper-details-sink', true );
-    if( $camper_details_sink == "yes") { 
-      $camper_details_sink_checked = 'checked="checked"'; 
+    if( $camper_details_sink == "yes") {
+      $camper_details_sink_checked = 'checked="checked"';
     } else {
       $camper_details_sink_checked = '';
     }
 
     $camper_details_toilet = get_post_meta( $camper_data->ID, 'camper-details-toilet', true );
-    if( $camper_details_toilet == "yes") { 
-      $camper_details_toilet_checked = 'checked="checked"'; 
+    if( $camper_details_toilet == "yes") {
+      $camper_details_toilet_checked = 'checked="checked"';
     } else {
       $camper_details_toilet_checked = '';
     }
 
     $camper_details_tv = get_post_meta( $camper_data->ID, 'camper-details-tv', true );
-    if( $camper_details_tv == "yes") { 
-      $camper_details_tv_checked = 'checked="checked"'; 
+    if( $camper_details_tv == "yes") {
+      $camper_details_tv_checked = 'checked="checked"';
     } else {
       $camper_details_tv_checked = '';
     }
@@ -560,7 +573,7 @@
 
     // Gallery
     if ( $_POST['camper-details-gallery'] ){
-      
+
       // Build array for saving post meta
       $gallery_data = array();
       for ($i = 0; $i < count( $_POST['camper-details-gallery']['image_url'] ); $i++ ){
@@ -574,11 +587,11 @@
       else {
         delete_post_meta( $camper_data_id, 'camper-details-gallery-data' );
       }
-    } 
+    }
     // Nothing received, all fields are empty, delete option
     else {
       delete_post_meta( $camper_data_id, 'camper-details-gallery-data' );
-    }    
+    }
 
     // Price
     if (  array_key_exists( 'camper-details-price', $_POST )  ) {
@@ -752,7 +765,7 @@
         'camper-details-shower',
         ''
       );
-    }    
+    }
 
     // Hob
     if (  isset( $_POST[ 'camper-details-hob' ] )  ) {
@@ -768,7 +781,7 @@
         'camper-details-hob',
         ''
       );
-    }      
+    }
 
     // Sink
     if (  isset( $_POST[ 'camper-details-sink' ] )  ) {
@@ -784,7 +797,7 @@
         'camper-details-sink',
         ''
       );
-    }      
+    }
 
     // Toilet
     if (  isset( $_POST[ 'camper-details-toilet' ] )  ) {
@@ -800,7 +813,7 @@
         'camper-details-toilet',
         ''
       );
-    }     
+    }
 
     // TV
     if (  isset( $_POST[ 'camper-details-tv' ] )  ) {
@@ -816,7 +829,7 @@
         'camper-details-tv',
         ''
       );
-    } 
+    }
 
     // Camper ID
     if (  array_key_exists( 'camper-details-id', $_POST )  ) {
@@ -829,8 +842,8 @@
     }
 
   }
-  
- 
+
+
   /* Move metabox below editor
    */
   function mybooking_move_camper_metabox() {
@@ -849,7 +862,7 @@
   /* Camper Gallery scripts
    */
   function mybooking_camper_gallery_styles_scripts() {
-?> 
+?>
 <style type="text/css">
   // Gallery
 
@@ -859,9 +872,9 @@
 
 .image_container {
     float:left!important;
-    width: 100px;
+    width: 120px;
     background: url('https://i.hizliresim.com/dOJ6qL.png');
-    height: 100px;
+    height: 120px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 3px;
@@ -869,8 +882,9 @@
 }
 
 .image_container img{
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
     border-radius: 3px;
 }
 
@@ -892,7 +906,7 @@
 #gallery_wrapper .gallery_single_row {
     float: left;
     display:inline-block;
-    width: 100px;
+    width: 120px;
     position: relative;
     margin-right: 8px;
     margin-bottom: 20px;
@@ -908,7 +922,7 @@
 
 .button.remove {
     background: none;
-    color: #f1f1f1;
+    color: red;
     position: absolute;
     border: none;
     top: 4px;
@@ -928,9 +942,9 @@
     color: #ffffff;
     border: none;
     box-shadow: none;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
     font-size: 4em;
 }
 
@@ -949,12 +963,12 @@
     var media_uploader = null;
     /**
      * Uploader image
-     */  
+     */
     function open_media_uploader_image(obj){
       console.log('Image');
       media_uploader = wp.media({
-        frame:    "post", 
-        state:    "insert", 
+        frame:    "post",
+        state:    "insert",
         multiple: false
       });
       media_uploader.on("insert", function(){
@@ -970,8 +984,8 @@
     function open_media_uploader_image_this(obj){
       console.log('Existing image');
       media_uploader = wp.media({
-        frame:    "post", 
-        state:    "insert", 
+        frame:    "post",
+        state:    "insert",
         multiple: false
       });
       media_uploader.on("insert", function(){
@@ -986,9 +1000,9 @@
     function open_media_uploader_image_plus(){
       console.log('New image');
       media_uploader = wp.media({
-        frame:    "post", 
-        state:    "insert", 
-        multiple: true 
+        frame:    "post",
+        state:    "insert",
+        multiple: true
       });
       media_uploader.on("insert", function(){
 
@@ -1002,7 +1016,7 @@
           var html = '<img class="gallery_img_img" src="'+image_url+'" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>';
           element.append(html);
           element.find('.meta_image_url').val(image_url);
-          console.log(image_url);   
+          console.log(image_url);
         }
       });
       media_uploader.open();
@@ -1023,4 +1037,3 @@
   // Add Scripts
   add_action( 'admin_head-post.php', 'mybooking_camper_gallery_styles_scripts' );
   add_action( 'admin_head-post-new.php', 'mybooking_camper_gallery_styles_scripts' );
-

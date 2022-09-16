@@ -93,8 +93,8 @@ include_once('includes/plugin-shortcodes.php');
 function mybooking_campers_body_class ( $classes ) {
 
     if ( 'camper' == get_post_type() ):
-        $classes[] = 'mybooking-product';
-        $classes[] = 'mybooking-contact-widget';
+      $classes[] = 'mybooking-product';
+      $classes[] = 'mybooking-contact-widget';
     endif;
 
     return $classes;
@@ -111,9 +111,9 @@ add_filter( 'body_class', 'mybooking_campers_body_class' );
 function mybooking_campers_include_micro_templates ( $classes ) {
 
     if ( 'camper' == get_post_type() ):
-        if ( function_exists('mybooking_engine_get_template') ):
-            mybooking_engine_get_template('mybooking-plugin-product-widget-tmpl.php');
-        endif;
+      if ( function_exists('mybooking_engine_get_template') ):
+        mybooking_engine_get_template('mybooking-plugin-product-widget-tmpl.php');
+      endif;
     endif;
 
 }

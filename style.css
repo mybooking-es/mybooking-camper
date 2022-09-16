@@ -33,6 +33,12 @@
 
 /** Grid **/
 
+.mybooking-campers .mb-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
 .mybooking-campers .mb-row {
   display: block!important;
   margin: 0 auto;

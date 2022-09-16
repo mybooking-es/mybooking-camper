@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 get_header(); ?>
 
 <div class="page_content mybooking-campers">
-	<div class="container" id="content" tabindex="-1">
+	<div class="mb-container" id="content" tabindex="-1">
 		<div class="mb-row">
 			<div class="mb-col-md-12">
 
