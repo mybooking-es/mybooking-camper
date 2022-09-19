@@ -43,27 +43,33 @@
                 <?php
                   if ( isset( $camper_gallery_data['image_url'] ) ){
                     for( $i = 0; $i < count( $camper_gallery_data['image_url'] ); $i++ ){
+                      $camper_gallery_item_src =  wp_get_attachment_image_src($camper_gallery_data['image_url'][$i],
+                                                                              'medium'
+                                                                              ); 
+                      if (!empty($camper_gallery_item_src)) {
                     ?>
-                    <div class="gallery_single_row dolu">
-                      <div class="gallery_area image_container ">
-                        <img class="gallery_img_img" src="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>
-                        <input type="hidden"
-                             class="meta_image_url"
-                             name="camper-details-gallery[image_url][]"
-                             value="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>"
-                          />
+                      <div class="gallery_single_row dolu">
+                        <div class="gallery_area image_container ">
+                          <img class="gallery_img_img" src="<?php esc_html_e( $camper_gallery_item_src[0] ); ?>" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>
+                          <input type="hidden"
+                              class="meta_image_url"
+                              name="camper-details-gallery[image_url][]"
+                              value="<?php esc_html_e( $camper_gallery_data['image_url'][$i] ); ?>"
+                            />
+                        </div>
+                        <div class="gallery_area">
+                          <span class="button remove" onclick="remove_img(this)" title="Remove"/><i class="dashicons dashicons-trash"></i></span>
+                        </div>
+                        <div class="clear">
+                        </div>
                       </div>
-                      <div class="gallery_area">
-                        <span class="button remove" onclick="remove_img(this)" title="Remove"/><i class="dashicons dashicons-trash"></i></span>
-                      </div>
-                      <div class="clear">
-                      </div>
-                    </div>
                     <?php
+                      }
                     }
                   }
                 ?>
               </div>
+              <!-- Prepare new image -->
               <div style="display:none" id="master_box">
                 <div class="gallery_single_row">
                   <div class="gallery_area image_container" onclick="open_media_uploader_image(this)">
@@ -956,16 +962,22 @@
 }
 </style>
 <script type="text/javascript">
+    // Media uploader
+    var media_uploader = null;
+    
+    /**
+     * Remove Image
+     */
     function remove_img(value) {
       var parent=jQuery(value).parent().parent();
       parent.remove();
     }
-    var media_uploader = null;
+    
     /**
      * Uploader image
      */
     function open_media_uploader_image(obj){
-      console.log('Image');
+      // Upload image
       media_uploader = wp.media({
         frame:    "post",
         state:    "insert",
@@ -974,31 +986,41 @@
       media_uploader.on("insert", function(){
         var json = media_uploader.state().get("selection").first().toJSON();
         var image_url = json.url;
+        var image_id = json.id;
         var html = '<img class="gallery_img_img" src="'+image_url+'" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>';
-        console.log(image_url);
         jQuery(obj).append(html);
-        jQuery(obj).find('.meta_image_url').val(image_url);
-      });
-      media_uploader.open();
-    }
-    function open_media_uploader_image_this(obj){
-      console.log('Existing image');
-      media_uploader = wp.media({
-        frame:    "post",
-        state:    "insert",
-        multiple: false
-      });
-      media_uploader.on("insert", function(){
-        var json = media_uploader.state().get("selection").first().toJSON();
-        var image_url = json.url;
-        jQuery(obj).attr('src',image_url);
-        jQuery(obj).siblings('.meta_image_url').val(image_url);
+        // Prepare the hidden field to hold the ID
+        jQuery(obj).find('.meta_image_url').val(image_id);
       });
       media_uploader.open();
     }
 
+    /**
+     * Uploader image
+     */
+    function open_media_uploader_image_this(obj){
+      // Change image
+      media_uploader = wp.media({
+        frame:    "post",
+        state:    "insert",
+        multiple: false
+      });
+      media_uploader.on("insert", function(){
+        var json = media_uploader.state().get("selection").first().toJSON();       
+        var image_url = json.url;
+        var image_id = json.id;
+        jQuery(obj).attr('src',image_url);
+        // Prepare the hidden field to hold the ID
+        jQuery(obj).siblings('.meta_image_url').val(image_id);
+      });
+      media_uploader.open();
+    }
+
+    /**
+     * Append image
+     */
     function open_media_uploader_image_plus(){
-      console.log('New image');
+      // Uploader
       media_uploader = wp.media({
         frame:    "post",
         state:    "insert",
@@ -1008,22 +1030,24 @@
 
         var length = media_uploader.state().get("selection").length;
         var images = media_uploader.state().get("selection").models;
+
         for(var i = 0; i < length; i++){
+          var image_id = images[i].attributes.id;
           var image_url = images[i].changed.url;
           var box = jQuery('#master_box').html();
           jQuery(box).appendTo('#img_box_container');
           var element = jQuery('#img_box_container .gallery_single_row:last-child').find('.image_container');
           var html = '<img class="gallery_img_img" src="'+image_url+'" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>';
           element.append(html);
-          element.find('.meta_image_url').val(image_url);
-          console.log(image_url);
+          // Prepare the hidden field to hold the ID      
+          element.find('.meta_image_url').val(image_id);   
         }
       });
       media_uploader.open();
     }
     jQuery(function() {
-            jQuery("#img_box_container").sortable(); // Activate jQuery UI sortable feature
-        });
+      jQuery("#img_box_container").sortable(); // Activate jQuery UI sortable feature
+    });
     </script>
 <?php
   }

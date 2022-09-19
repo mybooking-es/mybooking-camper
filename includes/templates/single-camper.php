@@ -135,16 +135,23 @@ get_header(); ?>
 
 						<div class="mb-col-md-8">
 
-              <!-- The images -->
-              <?php if( $camper_details_photos_count !='' ) { ?>
-                <div class="mybooking-campers_carousel mybooking-product-carousel-inner">
-                  <?php for( $i=0; $i<$camper_details_photos_count; $i++ ) { ?>
-                    <div class="mybooking-carousel-item">
-                      <img class="mybooking-campers_carousel-img" src="<?php echo $camper_details_photos_url_array[$i]; ?>" alt="Camper image"/>
-                    </div>
-                  <?php } ?>
-                </div>
-              <?php } ?>
+							<!-- The images -->
+							<?php if( $camper_details_photos_count !='' ) { ?>
+								<div class="mybooking-campers_carousel mybooking-product-carousel-inner">
+								<?php for( $i=0; $i<$camper_details_photos_count; $i++ ) { ?>
+									<div class="mybooking-carousel-item">
+									<?php  	
+									    $camper_photo = wp_get_attachment_image(
+											$camper_details_photos_url_array[$i],
+											'full',
+											false,
+											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+										); 
+										echo wp_kses_post( $camper_photo ) ?>
+									</div>
+								<?php } ?>
+								</div>
+							<?php } ?>
 
 							<!-- Content -->
 							<div class="mybooking-campers_entry-content entry-content">
