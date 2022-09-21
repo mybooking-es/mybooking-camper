@@ -5,6 +5,8 @@
 ### Fixed
 - Inserting images with IDs in order to get WP functions applied
 - Forced cards icon's width to avoid Elemento style crashing
+- Translation error on card's buttons
+- Duplicated content from shortcode on Elementor editor
 
 ## 1.0.2
 
