@@ -1,9 +1,9 @@
 <?php
 /**
-*		CAMPERS LOOP PART
+*		camperS LOOP PART
 *  	---------------
 *
-* 	@version 0.0.2
+* 	@version 0.0.1
 *   @package WordPress
 *   @subpackage Mybooking campers Plugin
 *   @since 1.0.3
@@ -48,17 +48,10 @@ function mybooking_campers_shortcode() {
     			<div class="mb-col-md-12">
             <div class="mybooking-campers_grid">
 
-              <?php if ( have_posts() ) : ?>
-    					  <?php while ( have_posts() ) : the_post(); ?>
-
-    					    <?php include('loop-part.php'); ?>
-
-    					  <?php endwhile; ?>
-
-    					<!-- No content -->
-    					<?php else : ?>
-    					  <h3><?php echo esc_html_x( 'No content found. Please publish at least one post to show something at here', 'blog_message', 'mybooking' ); ?></h3>
-    					<?php endif; ?>
+              <?php while( $campers_loop->have_posts() ) {
+                  $campers_loop->the_post();
+                  include('templates/loop-part.php');
+              } ?>
 
             </div>
           </div>
