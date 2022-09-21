@@ -30,6 +30,8 @@ add_action( 'init', 'register_camper_shortcodes' );
  *
  */
 function mybooking_campers_shortcode() {
+
+    ob_start();
     global $wp_query,
            $post;
 
@@ -60,4 +62,5 @@ function mybooking_campers_shortcode() {
     </div>
 
   <?php  wp_reset_postdata();
+  return ob_get_clean();
 }
