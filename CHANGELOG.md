@@ -1,5 +1,11 @@
 # Mybooking Campers plugin Changelog
 
+## 1.0.3
+
+### Fixed
+- Inserting images with IDs in order to get WP functions applied
+- Forced cards icon's width to avoid Elemento style crashing
+
 ## 1.0.2
 
 ### Fixed
