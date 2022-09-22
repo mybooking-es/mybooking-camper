@@ -16,14 +16,15 @@ get_header(); ?>
 
 <!-- Gets custom fields data -->
 <?php
-  $camper_details_gallery = get_post_meta( $post->ID, 'camper-details-gallery-data', true );
+ 	$camper_details_gallery = get_post_meta( $post->ID, 'camper-details-gallery-data', true );
 	if ( isset( $camper_details_gallery ) && !empty( $camper_details_gallery ) ) {
 		$camper_details_photos_url_array = $camper_details_gallery['image_url'];
 	}
 	else {
 		$camper_details_photos_url_array = [];
 	}
-
+	$camper_details_daily_distribution = get_post_meta( $post->ID, 'camper-details-daily-distribution', true );
+	$camper_details_nightly_distribution = get_post_meta( $post->ID, 'camper-details-nightly-distribution', true );
 	$camper_details_photos_count = sizeof($camper_details_photos_url_array);
 	$camper_details_price = get_post_meta( $post->ID, 'camper-details-price', true );
 	$camper_details_brand = get_post_meta( $post->ID, 'camper-details-brand', true );
@@ -148,11 +149,37 @@ get_header(); ?>
   											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
   										);
   										echo wp_kses_post( $camper_photo )
-                    ?>
+                    				?>
 									</div>
 								<?php } ?>
 								</div>
 							<?php } ?>
+
+							<!-- Daily and nightly distribution -->
+							<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
+								<?php
+  									    $camper_daily_distribution_photo = wp_get_attachment_image(
+  											$camper_details_daily_distribution,
+  											'full',
+  											false,
+  											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+  										);
+  										echo wp_kses_post( $camper_daily_distribution_photo )
+                    				?>
+							<?php } ?>	
+
+							<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
+								<?php
+  									    $camper_nightly_distribution_photo = wp_get_attachment_image(
+  											$camper_details_nightly_distribution,
+  											'full',
+  											false,
+  											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+  										);
+  										echo wp_kses_post( $camper_nightly_distribution_photo )
+                    				?>
+							<?php } ?>	
+
 
 							<!-- Content -->
 							<div class="mybooking-campers_entry-content entry-content">
