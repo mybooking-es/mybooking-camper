@@ -3,7 +3,7 @@
 *		CAMPERS SINGLE
 *  	------------
 *
-* 	@version 0.0.1
+* 	@version 0.0.4
 *   @package WordPress
 *   @subpackage Mybooking campers Plugin
 *   @since 1.0.0
@@ -140,14 +140,15 @@ get_header(); ?>
 								<div class="mybooking-campers_carousel mybooking-product-carousel-inner">
 								<?php for( $i=0; $i<$camper_details_photos_count; $i++ ) { ?>
 									<div class="mybooking-carousel-item">
-									<?php  	
-									    $camper_photo = wp_get_attachment_image(
-											$camper_details_photos_url_array[$i],
-											'full',
-											false,
-											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
-										); 
-										echo wp_kses_post( $camper_photo ) ?>
+  									<?php
+  									    $camper_photo = wp_get_attachment_image(
+  											$camper_details_photos_url_array[$i],
+  											'full',
+  											false,
+  											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+  										);
+  										echo wp_kses_post( $camper_photo )
+                    ?>
 									</div>
 								<?php } ?>
 								</div>

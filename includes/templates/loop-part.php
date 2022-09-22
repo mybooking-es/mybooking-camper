@@ -96,7 +96,7 @@ defined( 'ABSPATH' ) || exit;
       </div>
 
       <!-- Read more -->
-      <a class="button btn btn-choose-product mybooking-campers_btn-book" role="button" href="<?php the_permalink(); ?>"><?php echo esc_html_x('Details', 'renting_choose_product', 'mybooking-camper') ?></a>
+      <a class="button btn btn-choose-product mybooking-campers_btn-book" role="button" href="<?php the_permalink(); ?>"><?php echo esc_html_x('Details', 'renting_choose_product', 'mybooking-campers') ?></a>
     </div>
   </div>
 </article>
