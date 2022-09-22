@@ -154,32 +154,39 @@ get_header(); ?>
 								<?php } ?>
 								</div>
 							<?php } ?>
+							
+							<br>
 
 							<!-- Daily and nightly distribution -->
-							<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
-								<?php
-  									    $camper_daily_distribution_photo = wp_get_attachment_image(
-  											$camper_details_daily_distribution,
-  											'full',
-  											false,
-  											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
-  										);
-  										echo wp_kses_post( $camper_daily_distribution_photo )
-                    				?>
-							<?php } ?>	
+							<div class="mb-col-md-6">
+								<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
+									<?php
+											$camper_daily_distribution_photo = wp_get_attachment_image(
+												$camper_details_daily_distribution,
+												'full',
+												false,
+												['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+											);
+											echo wp_kses_post( $camper_daily_distribution_photo )
+										?>
+								<?php } ?>	
+							</div>
+							
+							<div class="mb-col-md-6">
+								<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
+									<?php
+											$camper_nightly_distribution_photo = wp_get_attachment_image(
+												$camper_details_nightly_distribution,
+												'full',
+												false,
+												['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+											);
+											echo wp_kses_post( $camper_nightly_distribution_photo )
+										?>
+								<?php } ?>	
+							</div>	
 
-							<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
-								<?php
-  									    $camper_nightly_distribution_photo = wp_get_attachment_image(
-  											$camper_details_nightly_distribution,
-  											'full',
-  											false,
-  											['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
-  										);
-  										echo wp_kses_post( $camper_nightly_distribution_photo )
-                    				?>
-							<?php } ?>	
-
+							<br>
 
 							<!-- Content -->
 							<div class="mybooking-campers_entry-content entry-content">
