@@ -45,7 +45,7 @@
                       for( $i = 0; $i < count( $camper_gallery_data['image_url'] ); $i++ ){
                         $camper_gallery_item_src =  wp_get_attachment_image_src($camper_gallery_data['image_url'][$i],
                                                                                 'medium'
-                                                                                ); 
+                                                                                );
                         if (!empty($camper_gallery_item_src)) {
                       ?>
                         <div class="gallery_single_row dolu">
@@ -94,25 +94,16 @@
           </tr>
         </tbody>
       </table>
-    
 
-    <?php  
-       // Daily and nightly distribution            
-       $camper_daily_distribution = get_post_meta( $camper_data->ID, 'camper-details-daily-distribution', true );
+
+    <?php
+       // Nightly distribution
        $camper_nightly_distribution = get_post_meta( $camper_data->ID, 'camper-details-nightly-distribution', true );
-       $camper_daily_distribution_src = null;
        $camper_nightly_distribution_src = null;
-       if ( isset($camper_daily_distribution) ) {
-         $camper_daily_distribution_src =  wp_get_attachment_image_src($camper_daily_distribution,
-                                                                       'medium');
-       } 
-       if ( isset($camper_nightly_distribution) ) {
-        $camper_nightly_distribution_src =  wp_get_attachment_image_src($camper_nightly_distribution,
-                                                                       'medium');
-      } 
-       ?>
-
-      <!-- Daily distribution --> 
+       if ( isset( $camper_nightly_distribution ) ) {
+        $camper_nightly_distribution_src =  wp_get_attachment_image_src( $camper_nightly_distribution,'medium' );
+      }
+    ?>
       <table class="form-table">
         <tbody>
           <tr>
@@ -123,46 +114,46 @@
               <div class="gallery_wrapper">
                 <div class="gallery_single_row dolu">
                   <div class="gallery_area image_container camper-image">
-                    <img id="camper-details-daily-distribution-img" 
-                        class="gallery_img_img" 
-                          <?php if ( empty($camper_daily_distribution_src) ) { ?>
+                    <img id="camper-details-daily-distribution-img"
+                        class="gallery_img_img"
+                          <?php if ( empty( $camper_daily_distribution_src ) ) { ?>
                             style="display: none"
-                          <?php } else { ?> 
-                            src="<?php esc_html_e( $camper_daily_distribution_src[0] ); ?>" 
-                          <?php } ?> 
-                            height="120" width="120" 
+                          <?php } else { ?>
+                            src="<?php esc_html_e( $camper_daily_distribution_src[0] ); ?>"
+                          <?php } ?>
+                            height="120" width="120"
                             onclick="open_media_uploader_single_image('#camper-details-daily-distribution-img',
                                                                       '#camper-details-daily-distribution',
                                                                       '#camper-details-daily-distribution-button',
                                                                       '#camper-details-daily-distribution-remove-button' );"/>
-                  </div>  
+                  </div>
                   <div class="gallery_area">
-                    <span class="button remove" id="camper-details-daily-distribution-remove-button" 
-                          <?php if ( empty($camper_daily_distribution_src) ) { ?>
+                    <span class="button remove" id="camper-details-daily-distribution-remove-button"
+                          <?php if ( empty( $camper_daily_distribution_src ) ) { ?>
                             style="display: none"
-                          <?php } ?>  
+                          <?php } ?>
                           title="Remove"
                           onclick="remove_single_image('#camper-details-daily-distribution-img', '#camper-details-daily-distribution', '#camper-details-daily-distribution-button', '#camper-details-daily-distribution-remove-button' );"/><i class="dashicons dashicons-trash"></i></span>
-                  </div> 
-                  <div class="clear"></div>               
-                </div>  
+                  </div>
+                  <div class="clear"></div>
+                </div>
                 <input
                     type="hidden"
                     name="camper-details-daily-distribution"
                     <?php if ( isset( $camper_daily_distribution ) ) { ?>
                       value="<?php echo esc_attr( $camper_daily_distribution ); ?>"
-                    <?php } ?>  
+                    <?php } ?>
                     id="camper-details-daily-distribution"
                     class="components-text-control__input">
-                    
-                <button type="button add" 
-                          class="button" 
+
+                <button type="button add"
+                          class="button add"
                           id="camper-details-daily-distribution-button"
-                          <?php if ( !empty($camper_daily_distribution_src) ) { ?>
+                          <?php if ( !empty( $camper_daily_distribution_src ) ) { ?>
                             style="display: none"
-                          <?php } ?>  
+                          <?php } ?>
                           onclick="open_media_uploader_single_image('#camper-details-daily-distribution-img', '#camper-details-daily-distribution', '#camper-details-daily-distribution-button', '#camper-details-daily-distribution-remove-button' );">+</button>
-              </div>  
+              </div>
             </td>
             <td style="width: 45%;">
               <p class="description"><?php echo esc_html_x( 'Set the daily distribution image.', 'camper-single', 'mybooking-campers' ) ?></p>
@@ -171,7 +162,14 @@
         </tbody>
       </table>
 
-      <!-- Nightly distribution -->
+    <?php
+      // Daily distribution
+      $camper_daily_distribution = get_post_meta( $camper_data->ID, 'camper-details-daily-distribution', true );
+      $camper_daily_distribution_src = null;
+      if ( isset( $camper_daily_distribution ) ) {
+        $camper_daily_distribution_src =  wp_get_attachment_image_src( $camper_daily_distribution,'medium' );
+      }
+    ?>
       <table class="form-table">
         <tbody>
           <tr>
@@ -182,45 +180,47 @@
               <div class="gallery_wrapper">
                 <div class="gallery_single_row">
                   <div class="gallery_area image_container camper-image">
-                    <img id="camper-details-nightly-distribution-img" 
-                        class="gallery_img_img" 
-                          <?php if ( empty($camper_nightly_distribution_src) ) { ?>
+                    <img id="camper-details-nightly-distribution-img"
+                        class="gallery_img_img"
+                          <?php if ( empty( $camper_nightly_distribution_src ) ) { ?>
                             style="display: none"
-                          <?php } else { ?> 
-                            src="<?php esc_html_e( $camper_nightly_distribution_src[0] ); ?>" 
-                          <?php } ?> 
-                            height="120" width="120" 
+                          <?php } else { ?>
+                            src="<?php esc_html_e( $camper_nightly_distribution_src[0] ); ?>"
+                          <?php } ?>
+                            height="120" width="120"
                             onclick="open_media_uploader_single_image('#camper-details-nightly-distribution-img',
                                                                       '#camper-details-nightly-distribution',
                                                                       '#camper-details-nightly-distribution-button',
                                                                       '#camper-details-nightly-distribution-remove-button' );"/>
                   </div>
                   <div class="gallery_area">
-                    <span class="button remove" id="camper-details-nightly-distribution-remove-button" 
-                          <?php if ( empty($camper_nightly_distribution_src) ) { ?>
+                    <span class="button remove" id="camper-details-nightly-distribution-remove-button"
+                          <?php if ( empty( $camper_nightly_distribution_src ) ) { ?>
                             style="display: none"
-                          <?php } ?> 
+                          <?php } ?>
                           onclick="remove_single_image('#camper-details-nightly-distribution-img', '#camper-details-nightly-distribution', '#camper-details-nightly-distribution-button', '#camper-details-nightly-distribution-remove-button' );"
                           title="Remove"/><i class="dashicons dashicons-trash"></i></span>
-                  </div> 
-                  <div class="clear"></div>                    
-                </div>    
+                  </div>
+                  <div class="clear"></div>
+                </div>
                 <input
                     type="hidden"
                     name="camper-details-nightly-distribution"
                     <?php if ( isset( $camper_nightly_distribution ) ) { ?>
                       value="<?php echo esc_attr( $camper_nightly_distribution ); ?>"
-                    <?php } ?>  
+                    <?php } ?>
                     id="camper-details-nightly-distribution"
                     class="components-text-control__input">
-                <button type="button add" 
-                        class="button" 
-                        <?php if ( !empty($camper_nightly_distribution_src) ) { ?>
+                <button type="button add"
+                        class="button add"
+                        <?php if ( !empty( $camper_nightly_distribution_src ) ) { ?>
                             style="display: none"
-                        <?php } ?>                         
+                        <?php } ?>
                         id="camper-details-nightly-distribution-button"
-                        onclick="open_media_uploader_single_image('#camper-details-nightly-distribution-img', '#camper-details-nightly-distribution', '#camper-details-nightly-distribution-button', '#camper-details-nightly-distribution-remove-button' );">+</button>
-              </div>  
+                        onclick="open_media_uploader_single_image('#camper-details-nightly-distribution-img', '#camper-details-nightly-distribution', '#camper-details-nightly-distribution-button', '#camper-details-nightly-distribution-remove-button' );">
+                        +
+                    </button>
+              </div>
             </td>
             <td style="width: 45%;">
               <p class="description"><?php echo esc_html_x( 'Set the nightly distribution image.', 'camper-single', 'mybooking-campers' ) ?></p>
@@ -347,6 +347,31 @@
           </td>
           <td style="width: 45%;">
             <p class="description"><?php echo esc_html_x( 'Number of sleeping places.', 'camper-single', 'mybooking-campers' ) ?></p>
+          </td>
+        </tr>
+      </table>
+    <?php
+
+    // License field
+    $camper_details_license = get_post_meta( $camper_data->ID, 'camper-details-license', true );
+    ?>
+      <table class="form-table">
+      <tbody>
+        <tr>
+          <th scope="row">
+            <label for="camper-details-license"><?php echo esc_html_x( 'License', 'camper-single', 'mybooking-campers' ) ?></label>
+          </th>
+          <td style="width: 45%;">
+            <input
+              type="text"
+              size="25"
+              name="camper-details-license"
+              value="<?php echo esc_attr( $camper_details_license ); ?>"
+              id="camper-details-license"
+              class="components-text-control__input">
+          </td>
+          <td style="width: 45%;">
+            <p class="description"><?php echo esc_html_x( 'Type of driving license required for this van.', 'camper-single', 'mybooking-campers' ) ?></p>
           </td>
         </tr>
       </table>
@@ -573,6 +598,13 @@
     <?php
 
     // Camper Extras
+    $camper_details_pets = get_post_meta( $camper_data->ID, 'camper-details-pets', true );
+    if( $camper_details_pets == "yes") {
+      $camper_details_pets_checked = 'checked="checked"';
+    } else {
+      $camper_details_pets_checked = '';
+    }
+
     $camper_details_conditioned = get_post_meta( $camper_data->ID, 'camper-details-conditioned', true );
     if( $camper_details_conditioned == "yes") {
       $camper_details_conditioned_checked = 'checked="checked"';
@@ -624,7 +656,15 @@
             <label>Extras</label>
           </th>
           <td style="width: 90%;">
-            <label style="margin-right: 20px;" for="camper-details-conditioned">
+            <label style="margin-right: 20px;" for="camper-details-pets">
+            <input
+              type="checkbox"
+              name="camper-details-pets"
+              value="yes" <?php echo $camper_details_pets_checked; ?>
+              id="camper-details-pets"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Pets allowed', 'camper-single', 'mybooking-campers' ) ?></label>
+            <label style="margin-right: 20px;" for="camper-details-pets">
             <input
               type="checkbox"
               name="camper-details-conditioned"
@@ -702,6 +742,31 @@
           </td>
           <td style="width: 45%;">
             <p class="description"><?php echo _x( 'Paste here the ID of this camper if you want to show the booking calendar. Requires an active <a href="https://mybooking.es/registro/" title="Register your account" target="_blank">Mybooking account</a> and a properly set inventory.', 'camper-single', 'mybooking-campers' ) ?></p>
+          </td>
+        </tr>
+      </table>
+    <?php
+
+    // Video URL
+    $camper_details_video_url = get_post_meta( $camper_data->ID, 'camper-details-video', true );
+    ?>
+      <table class="form-table">
+      <tbody>
+        <tr>
+          <th scope="row">
+            <label for="camper-details-video"><?php echo esc_html_x( 'Youtube link', 'camper-single', 'mybooking-campers' ) ?></label>
+          </th>
+          <td style="width: 45%;">
+            <input
+              type="text"
+              size="25"
+              name="camper-details-video"
+              value="<?php echo esc_attr( $camper_details_video_url ); ?>"
+              id="camper-details-video"
+              class="components-text-control__input">
+          </td>
+          <td style="width: 45%;">
+            <p class="description"><?php echo _x( 'You can show any video on YouTube', 'camper-single', 'mybooking-campers' ) ?></p>
           </td>
         </tr>
       </table>
@@ -790,6 +855,16 @@
         $camper_data_id,
         'camper-details-places',
         $camper_places
+      );
+    }
+
+    // Beds
+    if (  array_key_exists( 'camper-details-license', $_POST )  ) {
+      $camper_license = sanitize_text_field( $_POST['camper-details-license'] );
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-license',
+        $camper_license
       );
     }
 
@@ -895,6 +970,22 @@
 
     // -- Extras
 
+    // Pets
+    if (  isset( $_POST[ 'camper-details-pets' ] )  ) {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-pets',
+        'yes'
+      );
+    }
+    else {
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-pets',
+        ''
+      );
+    }
+
     // Air Conditioning
     if (  isset( $_POST[ 'camper-details-conditioned' ] )  ) {
       update_post_meta(
@@ -998,6 +1089,16 @@
         $camper_data_id,
         'camper-details-id',
         $camper_id
+      );
+    }
+
+    // Video URL
+    if (  array_key_exists( 'camper-details-video', $_POST )  ) {
+      $camper_video = sanitize_text_field( $_POST['camper-details-video'] );
+      update_post_meta(
+        $camper_data_id,
+        'camper-details-video',
+        $camper_video
       );
     }
 
@@ -1118,7 +1219,7 @@
 <script type="text/javascript">
     // Media uploader
     var media_uploader = null;
-    
+
     /**
      * Remove single image
      */
@@ -1157,7 +1258,7 @@
           jQuery(selectorRemoveButton).show();
           // Prepare the hidden field to hold the ID
           jQuery(selectorHidden).val(image_id);
-        }  
+        }
 
       });
       media_uploader.open();
@@ -1171,7 +1272,7 @@
       var parent=jQuery(value).parent().parent();
       parent.remove();
     }
-    
+
     /**
      * Uploader image
      */
@@ -1205,7 +1306,7 @@
         multiple: false
       });
       media_uploader.on("insert", function(){
-        var json = media_uploader.state().get("selection").first().toJSON();       
+        var json = media_uploader.state().get("selection").first().toJSON();
         var image_url = json.url;
         var image_id = json.id;
         jQuery(obj).attr('src',image_url);
@@ -1238,8 +1339,8 @@
           var element = jQuery('#img_box_container .gallery_single_row:last-child').find('.image_container');
           var html = '<img class="gallery_img_img" src="'+image_url+'" height="55" width="55" onclick="open_media_uploader_image_this(this)"/>';
           element.append(html);
-          // Prepare the hidden field to hold the ID      
-          element.find('.meta_image_url').val(image_id);   
+          // Prepare the hidden field to hold the ID
+          element.find('.meta_image_url').val(image_id);
         }
       });
       media_uploader.open();

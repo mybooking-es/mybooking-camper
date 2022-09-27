@@ -14,7 +14,9 @@ Generates an archive page accessible at /camper and single posts pages that you 
 
 The custom post type has the following features:
 * Image gallery
-* Vehicle form for details
+* Interior details gallery
+* Youtube video
+* Custom fields
 * Custom taxonomy
 * Featured image
 * Gutenberg editor for description
@@ -22,7 +24,7 @@ The custom post type has the following features:
 * Automatic contact form
 * Booking calendar via Mybooking's `product_id`
 
-Aditionally creates a shortcode that you can place anywhere in order to show the last six posts.
+Additionally creates a shortcode that you can place anywhere in order to show the last six posts.
 
 Works best with Mybooking Theme but is also compatible with Neve and Storefront by now. We are working on more theme compatibilities.
 
@@ -34,7 +36,7 @@ Install it uploading the zip package to your WordPress instance and proceed as u
 
 ## Usage
 
-Create posts related to campers and motorhomes with the new menú entry like you do with normal posts. Feel the form, upload some images and featured image and a description on Gutenberg editor area.
+Create posts related to campers and motorhomes with the new menu entry like you do with normal posts. Feel the form, upload some images and featured image and a description on Gutenberg editor area.
 
-Show your posts anywhere on your page by placing the folowwing shortcode:
+Show your posts anywhere on your site by placing the following shortcode:
 `[mybooking_campers_loop]`

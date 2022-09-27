@@ -12,16 +12,16 @@
 
 :root {
   /* Color palette */
-  --mb-accent-color: #2193F2;
+  --mb-camper-accent-color: green;
 
-  --mb-info-color: var(--mb-accent-color);
+  --mb-info-color: var(--mb-camper-accent-color);
   --mb-primary-selected-date: #2193f2;
   --mb-secondary-selected-date: #9cdbf7;
   --mb-success-color: #3DD992;
   --mb-danger-color: #E6546E;
   --mb-warning-color: #FFB74D;
-  --mb-lighter-color: #EEEEEE;
   --mb-light-color:  #DDDDDD;
+  --mb-lighter-color: #EEEEEE;
 
   --mb-border-color: #DDD;
   --mb-border-radius: 5px;
@@ -161,6 +161,7 @@
 }
 
 /* Cards */
+
 .mb-card {
   display: block;
   border: 1px solid var(--mb-border-color);
@@ -204,6 +205,7 @@
 }
 
 /* Lists */
+
 .mb-list {
   padding: 0;
   margin: 0 0 1rem 0!important;
@@ -246,6 +248,19 @@
   padding: 0.5rem 1rem;
 }
 
+.mb-list.has-separator {
+  display: block;
+}
+
+.mb-list.has-separator .mb-list-item {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--mb-border-color);
+}
+
+.mb-list.has-separator .mb-list-item:last-of-type {
+  border-bottom: none;
+}
+
 .mb-list-element.secondary {
   font-weight: 800;
 }
@@ -271,7 +286,9 @@
 }
 
 
-/* GENERAL */
+/* CAMPERS CPT STYLES *********************************************************/
+
+/* Resets */
 
 .mybooking-campers .wp-block-gallery img,
 .mybooking-campers .wp-block-image img {
@@ -282,6 +299,13 @@
   margin-bottom: 0;
 }
 
+.mybooking-product_calendar-step-list {
+  border: none!important;
+}
+
+.mybooking-product-carousel-inner {
+  max-width: 100%!important;
+}
 
 /* LOOP */
 
@@ -362,7 +386,7 @@
 }
 
 .mybooking-campers_card-price {
-  color: var(--mb-info-color);
+  color: var(--brand-primary, var(--mb-camper-accent-color));
   font-size: 1.3em;
   line-height: 1.5rem;
   font-weight: 800;
@@ -395,8 +419,8 @@
 .mybooking-campers_btn-book {
   padding: 10px 20px!important;
   margin: 1rem 0 0 0;
-  background-color: var(--mb-accent-color)!important;
-  border: 1px solid var(--mb-accent-color)!important;
+  background-color: var(--brand-primary, var(--mb-camper-accent-color))!important;
+  border: 1px var(--brand-primary, var(--mb-camper-accent-color))!important;
   border-radius: 5px!important;
   color: white!important;
   font-size: 1em!important;
@@ -422,7 +446,7 @@
 
 .mybooking-campers_card-category-item {
   padding: 0.3rem 0.7rem;
-  background-color: var(--mb-accent-color);
+  background-color: #212121;
   border-radius: 5px;
   color: white;
   font-size: 1em;
@@ -438,10 +462,16 @@
 
 .mybooking-breadcrumb_item {
   font-weight: 800;
+  color: var(--brand-primary, var(--mb-camper-accent-color))!important;
+  text-decoration: none;
+}
+
+.mybooking-breadcrumb_item:hover {
+  text-decoration: none;
 }
 
 .mybooking-breadcrumb_item.current {
-  color: #666;
+  color: #424242!important;
 }
 
 /* Header */
@@ -465,24 +495,28 @@
 }
 
 .mybooking-campers_price {
-  font-size: 1em;
-  font-weight: bold;
-  color: var(--mb-info-color);
+  font-size: 1.2em;
+  font-weight: bolder;
+  color: var(--brand-primary, var(--mb-camper-accent-color))
 }
 
 .mybooking-campers_post-subheader {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0 0 1rem 0;
+  border-bottom: 1px solid var(--mb-border-color);
 } @media ( min-width: 575.98px ) {
   .mybooking-campers_post-subheader {
     flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0 0.5rem 0;
   }
 }
 
 .mybooking-campers_post .mybooking-campers_card-category {
   position: initial;
-  margin-bottom: 2rem;
 } @media ( min-width: 575.98px ) {
   .mybooking-campers_post .mybooking-campers_card-category {
     margin: 0;
@@ -495,24 +529,25 @@
 
 /* Key characteristics */
 .mybooking-campers_post .mybooking-campers_details {
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0 1rem;
-  font-size: 1.2em;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+  font-size: 1em;
 } @media ( min-width: 575.98px ) {
   .mybooking-campers_post .mybooking-campers_details {
     flex-direction: row;
-    justify-content: flex-start;
     padding: 0;
   }
 }
 
 .mybooking-campers_post .mybooking-campers_characteristic {
-  border-bottom: 1px solid #DDD;
+  gap: 0;
+  flex-direction: column;
+  align-items: center;
 } @media ( min-width: 575.98px ) {
   .mybooking-campers_post .mybooking-campers_characteristic {
-    border-bottom: none;
+    gap: 0.1rem;
+    flex-direction: row;
   }
 }
 
@@ -522,6 +557,15 @@
 
 .mybooking-campers_characteristic-icon {
   max-width: 30px!important; /* Must be important! to avoid Elementor responsive styles conflict */
+}
+
+/* Calendar */
+.mybooking-campers_product-form {
+  margin-bottom: 3rem;
+}
+
+.mb-card.mybooking-campers_product-form {
+  background-color: var(--mb-lighter-color);
 }
 
 /* Carousel */
@@ -543,7 +587,15 @@
 }
 
 .mybooking-campers_carousel .slick-dots li.slick-active button::before {
-  color: var(--mb-accent-color);
+  color: var(--brand-primary, var(--mb-camper-accent-color));
+}
+
+/* Responsive videos */
+.mybooking-campers_video iframe {
+  width: 100%;
+  height: 500px;
+  margin-bottom: 3rem;
+  border-radius: 5px;
 }
 
 /* Content */
@@ -566,7 +618,10 @@
 
 /* Details listings */
 .mybooking-campers_section-title {
-  font-size: 1.6em;
+  padding-bottom:0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--mb-border-color);
+  font-size: 2em;
 }
 
 .mybooking-campers_details-list {
@@ -588,7 +643,7 @@
 }
 
 .mybooking-campers_details .dashicons {
-  color: var(--mb-info-color, #333);
+  color: var(--brand-primary, var(--mb-camper-accent-color));
 }
 
 /* Sidebar */
@@ -622,7 +677,7 @@
 .mybooking-campers .page-numbers.current {
   border: none!important;
   border-radius: 100%;
-  background-color: var(--brand-primary, #333);
+  background-color: var(--brand-primary, var(--mb-camper-accent-color));
 }
 
 .mybooking-campers_footer-nav {

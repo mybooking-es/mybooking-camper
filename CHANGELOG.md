@@ -1,12 +1,26 @@
 # Mybooking Campers plugin Changelog
 
+## 1.0.4
+
+### Added
+- Distribution images fields
+- Youtube videos field
+- New icons on characteristics: license, shower, wc & pets
+
+### Enhanced
+- Better color control, now theme is the default and fallsback to plugin config
+- Desing
+
+### Updated
+- Spanish translation
+
 ## 1.0.3
 
 ### Fixed
 - Inserting images with IDs in order to get WP functions applied
 - Forced cards icon's width to avoid Elemento style crashing
 - Translation error on card's buttons
-- Duplicated content from shortcode on Elementor editor
+- Ghost content from shortcode on Elementor editor
 
 ## 1.0.2
 

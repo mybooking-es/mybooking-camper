@@ -31,6 +31,7 @@ get_header(); ?>
 	$camper_details_model = get_post_meta( $post->ID, 'camper-details-model', true );
 	$camper_details_places = get_post_meta( $post->ID, 'camper-details-places', true );
 	$camper_details_beds = get_post_meta( $post->ID, 'camper-details-beds', true );
+  $camper_details_license = get_post_meta( $post->ID, 'camper-details-license', true );
 	$camper_details_lenght = get_post_meta( $post->ID, 'camper-details-lenght', true );
 	$camper_details_width = get_post_meta( $post->ID, 'camper-details-width', true );
 	$camper_details_height = get_post_meta( $post->ID, 'camper-details-height', true );
@@ -46,7 +47,9 @@ get_header(); ?>
 	$camper_details_sink = get_post_meta( $post->ID, 'camper-details-sink', true );
 	$camper_details_toilet = get_post_meta( $post->ID, 'camper-details-toilet', true );
 	$camper_details_tv = get_post_meta( $post->ID, 'camper-details-tv', true );
+  $camper_details_pets = get_post_meta( $post->ID, 'camper-details-pets', true );
 	$camper_details_id = get_post_meta( $post->ID, 'camper-details-id', true );
+  $camper_details_video = get_post_meta( $post->ID, 'camper-details-video', true );
 ?>
 
 <div id="content">
@@ -74,14 +77,14 @@ get_header(); ?>
 								<h1 class="mybooking-campers_post-header">
 									<?php the_title(); ?>
 
-									<!-- The price -->
-									<span>
-										<?php if ( $camper_details_price !='' ) {  ?>
-											<div class="mybooking-campers_price">
-												<?php echo esc_html( $camper_details_price ) ?> €
-											</div>
-										<?php } ?>
-									</span>
+                  <!-- The price -->
+                  <span>
+                    <?php if ( $camper_details_price !='' ) {  ?>
+                      <div class="mybooking-campers_price">
+                        <?php echo esc_html( $camper_details_price ) ?> €
+                      </div>
+                    <?php } ?>
+                  </span>
 								</h1>
 							<?php } ?>
 
@@ -103,32 +106,46 @@ get_header(); ?>
 										</span>
 									<?php } ?>
 
-									<?php if ( $camper_details_fuel !='' ) {  ?>
+                  <?php if ( $camper_details_toilet == 'yes' ) {  ?>
 										<span class="mybooking-campers_characteristic">
-											<img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/fuel.svg'; ?>">
-											<?php echo esc_html( $camper_details_fuel ) ?>
+											<img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/wc.svg'; ?>">
+											<?php echo esc_html_x( 'Yes', 'camper-single', 'mybooking-campers' ) ?>
 										</span>
 									<?php } ?>
 
-									<?php if ( $camper_details_gear !='' ) {  ?>
+                  <?php if ( $camper_details_shower == 'yes' ) {  ?>
+                    <span class="mybooking-campers_characteristic">
+                      <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/shower.svg'; ?>">
+                      <?php echo esc_html_x( 'Interior', 'camper-single', 'mybooking-campers' ) ?>
+                    </span>
+                  <?php } ?>
+
+                  <?php if ( $camper_details_license !='' ) {  ?>
 										<span class="mybooking-campers_characteristic">
-											<img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/transmission.svg'; ?>">
-											<?php echo esc_html( $camper_details_gear ) ?>
+											<img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/driving_license.svg'; ?>">
+											<?php echo esc_html( $camper_details_license ) ?>
+										</span>
+									<?php } ?>
+
+                  <?php if ( $camper_details_pets == 'yes' ) {  ?>
+										<span class="mybooking-campers_characteristic">
+                      <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/pets.svg'; ?>">
+											<?php echo esc_html_x( 'Yes', 'camper-single', 'mybooking-campers' ) ?>
 										</span>
 									<?php } ?>
 								</div>
 
-								<!-- Category -->
-								<div class="mybooking-campers_card-category">
-									<?php if ( get_post_type( get_the_ID() ) == 'camper' ) {
-										$camper_taxonomy = get_the_terms( get_the_ID(), 'campers' );
-										if ( isset( $camper_taxonomy ) && !empty( $camper_taxonomy ) ) {
-											foreach ( $camper_taxonomy as $camper_tax ) { ?>
-												<span class="mybooking-campers_card-category-item"><?php echo esc_html( $camper_tax->name ); ?></span>
-											<?php }
-										}
-									}?>
-								</div>
+                <!-- Category -->
+                <div class="mybooking-campers_card-category">
+                  <?php if ( get_post_type( get_the_ID() ) == 'camper' ) {
+                    $camper_taxonomy = get_the_terms( get_the_ID(), 'campers' );
+                    if ( isset( $camper_taxonomy ) && !empty( $camper_taxonomy ) ) {
+                      foreach ( $camper_taxonomy as $camper_tax ) { ?>
+                        <span class="mybooking-campers_card-category-item"><?php echo esc_html( $camper_tax->name ); ?></span>
+                      <?php }
+                    }
+                  }?>
+                </div>
 							</div>
 						</div>
 
@@ -154,54 +171,62 @@ get_header(); ?>
 								<?php } ?>
 								</div>
 							<?php } ?>
-							
-							<br>
 
-							<!-- Daily and nightly distribution -->
-							<div class="mb-col-md-6">
-								<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
-									<?php
-											$camper_daily_distribution_photo = wp_get_attachment_image(
-												$camper_details_daily_distribution,
-												'full',
-												false,
-												['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
-											);
-											echo wp_kses_post( $camper_daily_distribution_photo )
-										?>
-								<?php } ?>	
-							</div>
-							
-							<div class="mb-col-md-6">
-								<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
-									<?php
-											$camper_nightly_distribution_photo = wp_get_attachment_image(
-												$camper_details_nightly_distribution,
-												'full',
-												false,
-												['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
-											);
-											echo wp_kses_post( $camper_nightly_distribution_photo )
-										?>
-								<?php } ?>	
-							</div>	
-
-							<br>
-
-							<!-- Content -->
+							<!-- The content -->
 							<div class="mybooking-campers_entry-content entry-content">
 								<?php the_content(); ?>
 							</div>
 
-							<!-- Extras -->
-							<div class="mb-col-md-6">
-								<div class="mybooking-campers_details-list mb-list border">
-									<span class="mb-list-item">
-										<span class="mb-list_title">
-											<?php echo esc_html_x( 'Extras', 'camper-single', 'mybooking-campers' ) ?>
-										</span>
-									</span>
+              <!-- The video -->
+              <?php if ( $camper_details_video !='' ) {  ?>
+                <div class="mybooking-campers_video">
+                  <?php echo wp_oembed_get( $camper_details_video ); ?>
+                </div>
+              <?php } ?>
 
+              <!-- The distribution -->
+              <div class="mb-col-md-12">
+                <h2 class="mybooking-campers_section-title">
+                  <?php echo esc_html_x( 'Distribution', 'camper-single', 'mybooking-campers' ) ?>
+                </h2>
+
+  							<div class="mb-col-md-6">
+  								<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
+  									<?php
+  											$camper_daily_distribution_photo = wp_get_attachment_image(
+  												$camper_details_daily_distribution,
+  												'full',
+  												false,
+  												['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+  											);
+  											echo wp_kses_post( $camper_daily_distribution_photo )
+  										?>
+  								<?php } ?>
+  							</div>
+
+  							<div class="mb-col-md-6">
+  								<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
+  									<?php
+  											$camper_nightly_distribution_photo = wp_get_attachment_image(
+  												$camper_details_nightly_distribution,
+  												'full',
+  												false,
+  												['src', 'alt', 'class' => 'mybooking-campers_carousel-img']
+  											);
+  											echo wp_kses_post( $camper_nightly_distribution_photo )
+  										?>
+  								<?php } ?>
+  							</div>
+
+              </div>
+
+							<!-- Extras -->
+              <div class="mb-col-md-12">
+                <h2 class="mybooking-campers_section-title">
+                  <?php echo esc_html_x( 'Extras', 'camper-single', 'mybooking-campers' ) ?>
+                </h2>
+
+								<div class="mybooking-campers_details-list mb-list has-separator">
 										<span class="mb-list-item">
 											<?php echo esc_html_x( 'Air conditioning', 'camper-single', 'mybooking-campers' ) ?>
 											<?php if ( $camper_details_conditioned == 'yes' ) {  ?>
@@ -260,14 +285,12 @@ get_header(); ?>
 							</div>
 
 							<!-- Details -->
-							<div class="mb-col-md-6">
-								<div class="mybooking-campers_details-list mb-list border">
-									<span class="mb-list-item">
-										<span class="mb-list_title">
-											<?php echo esc_html_x( 'Details', 'camper-single', 'mybooking-campers' ) ?>
-										</span>
-									</span>
+							<div class="mb-col-md-12">
+                <h2 class="mybooking-campers_section-title">
+                  <?php echo esc_html_x( 'Details', 'camper-single', 'mybooking-campers' ) ?>
+                </h2>
 
+								<div class="mybooking-campers_details-list mb-list has-separator">
 									<?php if ( $camper_details_lenght !='' ) {  ?>
 										<span class="mb-list-item">
 											<span><?php echo esc_html_x( 'Vehicle length', 'camper-single', 'mybooking-campers' ) ?></span>
@@ -346,22 +369,22 @@ get_header(); ?>
 									</div>
 								<?php } ?>
 
+                <h2 class="mybooking-campers_section-title">
+                  <?php echo esc_html_x( 'Book online', 'camper-single', 'mybooking-campers' ) ?>
+                </h2>
+
 								<!-- Calendar or Form -->
 								<?php if ( $camper_details_id !='' ) {  ?>
-									<div class="mybooking-campers_product-form mb-sticky-container">
-										<h2 class="mybooking-campers_section-title">
-											<?php echo esc_html_x( 'Book online', 'camper-single', 'mybooking-campers' ) ?>
-										</h2>
+									<div class="mybooking-campers_product-form mb-card">
 										<?php echo do_shortcode( '[mybooking_rent_engine_product code="' . $camper_details_id . '"]' ); ?>
 									</div>
-								<?php } else { ?>
-									<div class="mybooking-campers_product-calendar mb-sticky-container">
-										<h2 class="mybooking-campers_section-title">
-											<?php echo esc_html_x( 'Contact', 'camper-single', 'mybooking-campers' ) ?>
-										</h2>
-										<?php echo do_shortcode( '[mybooking_contact subject="'.esc_html(get_the_title()).'"]' ); ?>
-									</div>
 								<?php } ?>
+                <div class="mybooking-campers_product-calendar mb-sticky-container">
+                  <h2 class="mybooking-campers_section-title">
+                    <?php echo esc_html_x( 'Contact', 'camper-single', 'mybooking-campers' ) ?>
+                  </h2>
+                  <?php echo do_shortcode( '[mybooking_contact subject="'.esc_html(get_the_title()).'"]' ); ?>
+                </div>
 							</div>
 						</div>
 					</div>
