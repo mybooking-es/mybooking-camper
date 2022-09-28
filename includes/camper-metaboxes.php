@@ -27,10 +27,21 @@
   */
   function camper_deatils_box( $camper_data ) {
 
-      // Gallery data
-      $camper_gallery_data = get_post_meta( $camper_data->ID, 'camper-details-gallery-data', true );
-      ?>
+    ?>
+    <table class="form-table">
+      <tr>
+        <th scope="row"></th>
+        <td style="width: 45%;">
+          <h3>Camper multimedia<h3>
+        </td>
+        <td style="width: 45%;"></td>
+      </tr>
+    </table>
+    <?php
 
+    // Gallery data
+    $camper_gallery_data = get_post_meta( $camper_data->ID, 'camper-details-gallery-data', true );
+    ?>
       <table class="form-table">
         <tbody>
           <tr>
@@ -95,22 +106,55 @@
         </tbody>
       </table>
 
+    <?php
+    // Video URL
+    $camper_details_video_url = get_post_meta( $camper_data->ID, 'camper-details-video', true );
+    ?>
+      <table class="form-table">
+      <tbody>
+        <tr>
+          <th scope="row">
+            <label for="camper-details-video"><?php echo esc_html_x( 'Youtube link', 'camper-single', 'mybooking-campers' ) ?></label>
+          </th>
+          <td style="width: 45%;">
+            <input
+              type="text"
+              size="25"
+              name="camper-details-video"
+              value="<?php echo esc_attr( $camper_details_video_url ); ?>"
+              id="camper-details-video"
+              class="components-text-control__input">
+          </td>
+          <td style="width: 45%;">
+            <p class="description"><?php echo _x( 'You can show any video on YouTube', 'camper-single', 'mybooking-campers' ) ?></p>
+          </td>
+        </tr>
+      </table>
 
     <?php
-       // Nightly distribution
-       $camper_nightly_distribution = get_post_meta( $camper_data->ID, 'camper-details-nightly-distribution', true );
-       $camper_nightly_distribution_src = null;
-       if ( isset( $camper_nightly_distribution ) ) {
-        $camper_nightly_distribution_src =  wp_get_attachment_image_src( $camper_nightly_distribution,'medium' );
-      }
+    // Nightly distribution
+    $camper_nightly_distribution = get_post_meta( $camper_data->ID, 'camper-details-nightly-distribution', true );
+    $camper_nightly_distribution_src = null;
+    if ( isset( $camper_nightly_distribution ) ) {
+      $camper_nightly_distribution_src =  wp_get_attachment_image_src( $camper_nightly_distribution,'medium' );
+    }
+
+    // Daily distribution
+    $camper_daily_distribution = get_post_meta( $camper_data->ID, 'camper-details-daily-distribution', true );
+    $camper_daily_distribution_src = null;
+    if ( isset( $camper_daily_distribution ) ) {
+      $camper_daily_distribution_src =  wp_get_attachment_image_src( $camper_daily_distribution,'medium' );
+    }
     ?>
       <table class="form-table">
         <tbody>
           <tr>
             <th scope="row">
-              <label for="camper-details-daily-distribution"><?php echo esc_html_x( 'Daily distribution image', 'camper-single', 'mybooking-campers' ) ?></label>
+              <label for="camper-details-daily-distribution"><b><?php echo esc_html_x( 'Distribution images', 'camper-single', 'mybooking-campers' ) ?></b></label>
             </th>
             <td style="width: 45%;">
+              <label for="camper-details-daily-distribution"><b><?php echo esc_html_x( 'Daily distribution image', 'camper-single', 'mybooking-campers' ) ?></b></label>
+              <br>
               <div class="gallery_wrapper">
                 <div class="gallery_single_row dolu">
                   <div class="gallery_area image_container camper-image">
@@ -154,29 +198,12 @@
                           <?php } ?>
                           onclick="open_media_uploader_single_image('#camper-details-daily-distribution-img', '#camper-details-daily-distribution', '#camper-details-daily-distribution-button', '#camper-details-daily-distribution-remove-button' );">+</button>
               </div>
-            </td>
-            <td style="width: 45%;">
               <p class="description"><?php echo esc_html_x( 'Set the daily distribution image.', 'camper-single', 'mybooking-campers' ) ?></p>
             </td>
-          </tr>
-        </tbody>
-      </table>
 
-    <?php
-      // Daily distribution
-      $camper_daily_distribution = get_post_meta( $camper_data->ID, 'camper-details-daily-distribution', true );
-      $camper_daily_distribution_src = null;
-      if ( isset( $camper_daily_distribution ) ) {
-        $camper_daily_distribution_src =  wp_get_attachment_image_src( $camper_daily_distribution,'medium' );
-      }
-    ?>
-      <table class="form-table">
-        <tbody>
-          <tr>
-            <th scope="row">
-              <label for="camper-details-nightly-distribution"><?php echo esc_html_x( 'Nightly distribution image', 'camper-single', 'mybooking-campers' ) ?></label>
-            </th>
             <td style="width: 45%;">
+              <label for="camper-details-nightly-distribution-img"><b><?php echo esc_html_x( 'Nightly distribution image', 'camper-single', 'mybooking-campers' ) ?></b></label>
+              <br>
               <div class="gallery_wrapper">
                 <div class="gallery_single_row">
                   <div class="gallery_area image_container camper-image">
@@ -221,8 +248,6 @@
                         +
                     </button>
               </div>
-            </td>
-            <td style="width: 45%;">
               <p class="description"><?php echo esc_html_x( 'Set the nightly distribution image.', 'camper-single', 'mybooking-campers' ) ?></p>
             </td>
           </tr>
@@ -230,10 +255,58 @@
       </table>
 
 
+
+      <table class="form-table">
+        <tr>
+          <th scope="row"></th>
+          <td style="width: 45%;">
+            <h3>Mybooking calendar<h3>
+          </td>
+          <td style="width: 45%;"></td>
+        </tr>
+      </table>
     <?php
-      // Price field
-      $camper_details_price = get_post_meta( $camper_data->ID, 'camper-details-price', true );
-      ?>
+
+    // ID field
+    $camper_details_id = get_post_meta( $camper_data->ID, 'camper-details-id', true );
+    ?>
+      <table class="form-table">
+      <tbody>
+        <tr>
+          <th scope="row">
+            <label for="camper-details-id"><?php echo esc_html_x( 'Camper ID', 'camper-single', 'mybooking-campers' ) ?></label>
+          </th>
+          <td style="width: 45%;">
+            <input
+              type="text"
+              size="25"
+              name="camper-details-id"
+              value="<?php echo esc_attr( $camper_details_id ); ?>"
+              id="camper-details-id"
+              class="components-text-control__input">
+          </td>
+          <td style="width: 45%;">
+            <p class="description"><?php echo _x( 'Paste here the ID of this camper if you want to show the booking calendar. Requires an active <a href="https://mybooking.es/registro/" title="Register your account" target="_blank">Mybooking account</a> and a properly set inventory.', 'camper-single', 'mybooking-campers' ) ?></p>
+          </td>
+        </tr>
+      </table>
+
+
+
+      <table class="form-table">
+        <tr>
+          <th scope="row"></th>
+          <td style="width: 45%;">
+            <h3>Camper characteristics<h3>
+          </td>
+          <td style="width: 45%;"></td>
+        </tr>
+      </table>
+
+    <?php
+    // Price field
+    $camper_details_price = get_post_meta( $camper_data->ID, 'camper-details-price', true );
+    ?>
       <table class="form-table">
       <tbody>
         <tr>
@@ -254,8 +327,8 @@
           </td>
         </tr>
       </table>
-    <?php
 
+    <?php
     // Brand field
     $camper_details_brand = get_post_meta( $camper_data->ID, 'camper-details-brand', true );
     ?>
@@ -277,8 +350,8 @@
           <td style="width: 45%;"></td>
         </tr>
       </table>
-    <?php
 
+    <?php
     // Model field
     $camper_details_model = get_post_meta( $camper_data->ID, 'camper-details-model', true );
     ?>
@@ -300,8 +373,8 @@
           <td style="width: 45%;"></td>
         </tr>
       </table>
-    <?php
 
+    <?php
     // Places field
     $camper_details_places = get_post_meta( $camper_data->ID, 'camper-details-places', true );
     ?>
@@ -325,8 +398,8 @@
           </td>
         </tr>
       </table>
-    <?php
 
+    <?php
     // Beds field
     $camper_details_beds = get_post_meta( $camper_data->ID, 'camper-details-beds', true );
     ?>
@@ -350,8 +423,8 @@
           </td>
         </tr>
       </table>
-    <?php
 
+    <?php
     // License field
     $camper_details_license = get_post_meta( $camper_data->ID, 'camper-details-license', true );
     ?>
@@ -373,6 +446,144 @@
           <td style="width: 45%;">
             <p class="description"><?php echo esc_html_x( 'Type of driving license required for this van.', 'camper-single', 'mybooking-campers' ) ?></p>
           </td>
+        </tr>
+      </table>
+
+    <?php
+    // Camper Extras
+    $camper_details_pets = get_post_meta( $camper_data->ID, 'camper-details-pets', true );
+    if( $camper_details_pets == "yes") {
+      $camper_details_pets_checked = 'checked="checked"';
+    } else {
+      $camper_details_pets_checked = '';
+    }
+
+    $camper_details_conditioned = get_post_meta( $camper_data->ID, 'camper-details-conditioned', true );
+    if( $camper_details_conditioned == "yes") {
+      $camper_details_conditioned_checked = 'checked="checked"';
+    } else {
+      $camper_details_conditioned_checked = '';
+    }
+
+    $camper_details_shower = get_post_meta( $camper_data->ID, 'camper-details-shower', true );
+    if( $camper_details_shower == true ) {
+      $camper_details_shower_checked = 'checked="checked"';
+    }
+    else {
+      $camper_details_shower_checked = '';
+    }
+
+    $camper_details_hob = get_post_meta( $camper_data->ID, 'camper-details-hob', true );
+    if( $camper_details_hob == "yes") {
+      $camper_details_hob_checked = 'checked="checked"';
+    } else {
+      $camper_details_hob_checked = '';
+    }
+
+    $camper_details_sink = get_post_meta( $camper_data->ID, 'camper-details-sink', true );
+    if( $camper_details_sink == "yes") {
+      $camper_details_sink_checked = 'checked="checked"';
+    } else {
+      $camper_details_sink_checked = '';
+    }
+
+    $camper_details_toilet = get_post_meta( $camper_data->ID, 'camper-details-toilet', true );
+    if( $camper_details_toilet == "yes") {
+      $camper_details_toilet_checked = 'checked="checked"';
+    } else {
+      $camper_details_toilet_checked = '';
+    }
+
+    $camper_details_tv = get_post_meta( $camper_data->ID, 'camper-details-tv', true );
+    if( $camper_details_tv == "yes") {
+      $camper_details_tv_checked = 'checked="checked"';
+    } else {
+      $camper_details_tv_checked = '';
+    }
+
+    ?>
+      <table class="form-table">
+      <tbody>
+        <tr>
+          <th scope="row">
+            <label>Extras</label>
+          </th>
+          <td style="width: 90%;">
+            <label style="margin-right: 20px;" for="camper-details-pets">
+            <input
+              type="checkbox"
+              name="camper-details-pets"
+              value="yes" <?php echo $camper_details_pets_checked; ?>
+              id="camper-details-pets"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Pets allowed', 'camper-single', 'mybooking-campers' ) ?></label>
+
+            <label style="margin-right: 20px;" for="camper-details-toilet">
+            <input
+              type="checkbox"
+              name="camper-details-toilet"
+              value="Toilet" <?php echo $camper_details_toilet_checked; ?>
+              id="camper-details-toilet"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Toilet', 'camper-single', 'mybooking-campers' ) ?></label>
+
+            <label style="margin-right: 20px;" for="camper-details-shower">
+            <input
+              type="checkbox"
+              name="camper-details-shower"
+              value="Shower" <?php echo $camper_details_shower_checked; ?>
+              id="camper-details-shower"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Shower', 'camper-single', 'mybooking-campers' ) ?></label>
+
+            <label style="margin-right: 20px;" for="camper-details-pets">
+            <input
+              type="checkbox"
+              name="camper-details-conditioned"
+              value="yes" <?php echo $camper_details_conditioned_checked; ?>
+              id="camper-details-conditioned"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Air conditioning', 'camper-single', 'mybooking-campers' ) ?></label>
+
+            <label style="margin-right: 20px;" for="camper-details-hob">
+            <input
+              type="checkbox"
+              name="camper-details-hob"
+              value="Hob" <?php echo $camper_details_hob_checked; ?>
+              id="camper-details-hob"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Hob', 'camper-single', 'mybooking-campers' ) ?></label>
+
+            <label style="margin-right: 20px;" for="camper-details-sink">
+            <input
+              type="checkbox"
+              name="camper-details-sink"
+              value="Sink" <?php echo $camper_details_sink_checked; ?>
+              id="camper-details-sink"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'Sink', 'camper-single', 'mybooking-campers' ) ?></label>
+
+            <label style="margin-right: 20px;" for="camper-details-tv">
+            <input
+              type="checkbox"
+              name="camper-details-tv"
+              value="TV" <?php echo $camper_details_tv_checked; ?>
+              id="camper-details-tv"
+              class="components-text-control__input">
+              <?php echo esc_html_x( 'TV', 'camper-single', 'mybooking-campers' ) ?></label>
+          </td>
+        </tr>
+      </table>
+
+
+
+      <table class="form-table">
+        <tr>
+          <th scope="row"></th>
+          <td style="width: 45%;">
+            <h3>Mechanical details<h3>
+          </td>
+          <td style="width: 45%;"></td>
         </tr>
       </table>
     <?php
@@ -595,181 +806,7 @@
           <td style="width: 45%;"></td>
         </tr>
       </table>
-    <?php
 
-    // Camper Extras
-    $camper_details_pets = get_post_meta( $camper_data->ID, 'camper-details-pets', true );
-    if( $camper_details_pets == "yes") {
-      $camper_details_pets_checked = 'checked="checked"';
-    } else {
-      $camper_details_pets_checked = '';
-    }
-
-    $camper_details_conditioned = get_post_meta( $camper_data->ID, 'camper-details-conditioned', true );
-    if( $camper_details_conditioned == "yes") {
-      $camper_details_conditioned_checked = 'checked="checked"';
-    } else {
-      $camper_details_conditioned_checked = '';
-    }
-
-    $camper_details_shower = get_post_meta( $camper_data->ID, 'camper-details-shower', true );
-    if( $camper_details_shower == true ) {
-      $camper_details_shower_checked = 'checked="checked"';
-    }
-    else {
-      $camper_details_shower_checked = '';
-    }
-
-    $camper_details_hob = get_post_meta( $camper_data->ID, 'camper-details-hob', true );
-    if( $camper_details_hob == "yes") {
-      $camper_details_hob_checked = 'checked="checked"';
-    } else {
-      $camper_details_hob_checked = '';
-    }
-
-    $camper_details_sink = get_post_meta( $camper_data->ID, 'camper-details-sink', true );
-    if( $camper_details_sink == "yes") {
-      $camper_details_sink_checked = 'checked="checked"';
-    } else {
-      $camper_details_sink_checked = '';
-    }
-
-    $camper_details_toilet = get_post_meta( $camper_data->ID, 'camper-details-toilet', true );
-    if( $camper_details_toilet == "yes") {
-      $camper_details_toilet_checked = 'checked="checked"';
-    } else {
-      $camper_details_toilet_checked = '';
-    }
-
-    $camper_details_tv = get_post_meta( $camper_data->ID, 'camper-details-tv', true );
-    if( $camper_details_tv == "yes") {
-      $camper_details_tv_checked = 'checked="checked"';
-    } else {
-      $camper_details_tv_checked = '';
-    }
-
-    ?>
-      <table class="form-table">
-      <tbody>
-        <tr>
-          <th scope="row">
-            <label>Extras</label>
-          </th>
-          <td style="width: 90%;">
-            <label style="margin-right: 20px;" for="camper-details-pets">
-            <input
-              type="checkbox"
-              name="camper-details-pets"
-              value="yes" <?php echo $camper_details_pets_checked; ?>
-              id="camper-details-pets"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'Pets allowed', 'camper-single', 'mybooking-campers' ) ?></label>
-            <label style="margin-right: 20px;" for="camper-details-pets">
-            <input
-              type="checkbox"
-              name="camper-details-conditioned"
-              value="yes" <?php echo $camper_details_conditioned_checked; ?>
-              id="camper-details-conditioned"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'Air conditioning', 'camper-single', 'mybooking-campers' ) ?></label>
-
-            <label style="margin-right: 20px;" for="camper-details-shower">
-            <input
-              type="checkbox"
-              name="camper-details-shower"
-              value="Shower" <?php echo $camper_details_shower_checked; ?>
-              id="camper-details-shower"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'Shower', 'camper-single', 'mybooking-campers' ) ?></label>
-
-            <label style="margin-right: 20px;" for="camper-details-hob">
-            <input
-              type="checkbox"
-              name="camper-details-hob"
-              value="Hob" <?php echo $camper_details_hob_checked; ?>
-              id="camper-details-hob"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'Hob', 'camper-single', 'mybooking-campers' ) ?></label>
-
-            <label style="margin-right: 20px;" for="camper-details-sink">
-            <input
-              type="checkbox"
-              name="camper-details-sink"
-              value="Sink" <?php echo $camper_details_sink_checked; ?>
-              id="camper-details-sink"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'Sink', 'camper-single', 'mybooking-campers' ) ?></label>
-
-            <label style="margin-right: 20px;" for="camper-details-toilet">
-            <input
-              type="checkbox"
-              name="camper-details-toilet"
-              value="Toilet" <?php echo $camper_details_toilet_checked; ?>
-              id="camper-details-toilet"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'Toilet', 'camper-single', 'mybooking-campers' ) ?></label>
-
-            <label style="margin-right: 20px;" for="camper-details-tv">
-            <input
-              type="checkbox"
-              name="camper-details-tv"
-              value="TV" <?php echo $camper_details_tv_checked; ?>
-              id="camper-details-tv"
-              class="components-text-control__input">
-              <?php echo esc_html_x( 'TV', 'camper-single', 'mybooking-campers' ) ?></label>
-          </td>
-        </tr>
-      </table>
-    <?php
-
-    // ID field
-    $camper_details_id = get_post_meta( $camper_data->ID, 'camper-details-id', true );
-    ?>
-      <table class="form-table">
-      <tbody>
-        <tr>
-          <th scope="row">
-            <label for="camper-details-id"><?php echo esc_html_x( 'Camper ID', 'camper-single', 'mybooking-campers' ) ?></label>
-          </th>
-          <td style="width: 45%;">
-            <input
-              type="text"
-              size="25"
-              name="camper-details-id"
-              value="<?php echo esc_attr( $camper_details_id ); ?>"
-              id="camper-details-id"
-              class="components-text-control__input">
-          </td>
-          <td style="width: 45%;">
-            <p class="description"><?php echo _x( 'Paste here the ID of this camper if you want to show the booking calendar. Requires an active <a href="https://mybooking.es/registro/" title="Register your account" target="_blank">Mybooking account</a> and a properly set inventory.', 'camper-single', 'mybooking-campers' ) ?></p>
-          </td>
-        </tr>
-      </table>
-    <?php
-
-    // Video URL
-    $camper_details_video_url = get_post_meta( $camper_data->ID, 'camper-details-video', true );
-    ?>
-      <table class="form-table">
-      <tbody>
-        <tr>
-          <th scope="row">
-            <label for="camper-details-video"><?php echo esc_html_x( 'Youtube link', 'camper-single', 'mybooking-campers' ) ?></label>
-          </th>
-          <td style="width: 45%;">
-            <input
-              type="text"
-              size="25"
-              name="camper-details-video"
-              value="<?php echo esc_attr( $camper_details_video_url ); ?>"
-              id="camper-details-video"
-              class="components-text-control__input">
-          </td>
-          <td style="width: 45%;">
-            <p class="description"><?php echo _x( 'You can show any video on YouTube', 'camper-single', 'mybooking-campers' ) ?></p>
-          </td>
-        </tr>
-      </table>
     <?php
   }
 

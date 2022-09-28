@@ -186,12 +186,15 @@ get_header(); ?>
 
               <!-- The distribution -->
               <div class="mb-col-md-12">
-                <h2 class="mybooking-campers_section-title">
-                  <?php echo esc_html_x( 'Distribution', 'camper-single', 'mybooking-campers' ) ?>
-                </h2>
 
-  							<div class="mb-col-md-6">
-  								<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
+                <?php if ( $camper_details_daily_distribution || $camper_details_nightly_distribution ) { ?>
+                  <h2 class="mybooking-campers_section-title">
+                    <?php echo esc_html_x( 'Distribution', 'camper-single', 'mybooking-campers' ) ?>
+                  </h2>
+                <?php } ?>
+
+								<?php if ( isset( $camper_details_daily_distribution ) ) { ?>
+                  <div class="mb-col-md-6">
   									<?php
   											$camper_daily_distribution_photo = wp_get_attachment_image(
   												$camper_details_daily_distribution,
@@ -201,11 +204,11 @@ get_header(); ?>
   											);
   											echo wp_kses_post( $camper_daily_distribution_photo )
   										?>
-  								<?php } ?>
-  							</div>
+                    </div>
+								<?php } ?>
 
-  							<div class="mb-col-md-6">
-  								<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
+								<?php if ( isset( $camper_details_nightly_distribution ) ) { ?>
+                  <div class="mb-col-md-6">
   									<?php
   											$camper_nightly_distribution_photo = wp_get_attachment_image(
   												$camper_details_nightly_distribution,
@@ -215,8 +218,8 @@ get_header(); ?>
   											);
   											echo wp_kses_post( $camper_nightly_distribution_photo )
   										?>
-  								<?php } ?>
-  							</div>
+                    </div>
+								<?php } ?>
 
               </div>
 
