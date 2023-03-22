@@ -15,15 +15,16 @@ defined( 'ABSPATH' ) || exit;
 
 <!-- Gets custom fields data -->
 <?php
-  $camper_details_brand = get_post_meta( $post->ID, 'camper-details-brand', true );
-  $camper_details_model = get_post_meta( $post->ID, 'camper-details-model', true );
-  $camper_details_price = get_post_meta( $post->ID, 'camper-details-price', true );
-  $camper_details_places = get_post_meta( $post->ID, 'camper-details-places', true );
+	$camper_details_brand = get_post_meta( $post->ID, 'camper-details-brand', true );
+	$camper_details_model = get_post_meta( $post->ID, 'camper-details-model', true );
+	$camper_details_price = get_post_meta( $post->ID, 'camper-details-price', true );
+	$camper_details_places = get_post_meta( $post->ID, 'camper-details-places', true );
 	$camper_details_beds = get_post_meta( $post->ID, 'camper-details-beds', true );
-  $camper_details_license = get_post_meta( $post->ID, 'camper-details-license', true );
-  $camper_details_shower = get_post_meta( $post->ID, 'camper-details-shower', true );
-  $camper_details_pets = get_post_meta( $post->ID, 'camper-details-pets', true );
-  $camper_details_toilet = get_post_meta( $post->ID, 'camper-details-toilet', true );
+	$camper_details_license = get_post_meta( $post->ID, 'camper-details-license', true );
+	$camper_details_shower = get_post_meta( $post->ID, 'camper-details-shower', true );
+	$camper_details_pets = get_post_meta( $post->ID, 'camper-details-pets', true );
+	$camper_details_toilet = get_post_meta( $post->ID, 'camper-details-toilet', true );
+	$camper_details_solar_panels = get_post_meta( $post->ID, 'camper-details-solar-panels', true );
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -99,6 +100,13 @@ defined( 'ABSPATH' ) || exit;
         <?php if ( $camper_details_pets == 'yes' ) {  ?>
           <span class="mybooking-campers_characteristic">
             <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/pets.svg'; ?>">
+            <?php echo esc_html_x( 'Yes', 'camper-single', 'mybooking-campers' ) ?>
+          </span>
+        <?php } ?>
+
+        <?php if ( $camper_details_solar_panels == 'yes' ) {  ?>
+          <span class="mybooking-campers_characteristic">
+            <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/solar-panels.svg'; ?>">
             <?php echo esc_html_x( 'Yes', 'camper-single', 'mybooking-campers' ) ?>
           </span>
         <?php } ?>

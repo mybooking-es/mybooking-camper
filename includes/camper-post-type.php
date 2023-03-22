@@ -1,49 +1,49 @@
 <?php
 /**
- * Register Mybooking campers Custom Post Type
+ * Register Mybooking Motorhome Custom Post Type
  *
  * @since 1.0.1
  */
 function mybooking_camper() {
 
 	$labels = array(
-		'name'                  => _x( 'Campers', 'Post Type General Name', 'mybooking-campers' ),
-		'singular_name'         => _x( 'Campers', 'Post Type Singular Name', 'mybooking-campers' ),
-		'menu_name'             => __( 'Campers', 'mybooking-campers' ),
-		'name_admin_bar'        => __( 'Campers', 'mybooking-campers' ),
-		'archives'              => __( 'Camper Archives', 'mybooking-campers' ),
-		'attributes'            => __( 'Camper Attributes', 'mybooking-campers' ),
-		'parent_item_colon'     => __( 'Parent camper:', 'mybooking-campers' ),
-		'all_items'             => __( 'All campers', 'mybooking-campers' ),
-		'add_new_item'          => __( 'Add New camper', 'mybooking-campers' ),
+		'name'                  => _x( 'Motorhomes', 'Post Type General Name', 'mybooking-campers' ),
+		'singular_name'         => _x( 'Motorhomes', 'Post Type Singular Name', 'mybooking-campers' ),
+		'menu_name'             => __( 'Motorhomes', 'mybooking-campers' ),
+		'name_admin_bar'        => __( 'Motorhomes', 'mybooking-campers' ),
+		'archives'              => __( 'Motorhome Archives', 'mybooking-campers' ),
+		'attributes'            => __( 'Motorhome Attributes', 'mybooking-campers' ),
+		'parent_item_colon'     => __( 'Parent motorhome:', 'mybooking-campers' ),
+		'all_items'             => __( 'All motorhomes', 'mybooking-campers' ),
+		'add_new_item'          => __( 'Add New Motorhome', 'mybooking-campers' ),
 		'add_new'               => __( 'Add New', 'mybooking-campers' ),
-		'new_item'              => __( 'New camper', 'mybooking-campers' ),
-		'edit_item'             => __( 'Edit camper', 'mybooking-campers' ),
-		'update_item'           => __( 'Update camper', 'mybooking-campers' ),
-		'view_item'             => __( 'View camper', 'mybooking-campers' ),
-		'view_items'            => __( 'View campers', 'mybooking-campers' ),
-		'search_items'          => __( 'Search camper', 'mybooking-campers' ),
+		'new_item'              => __( 'New Motorhome', 'mybooking-campers' ),
+		'edit_item'             => __( 'Edit Motorhome', 'mybooking-campers' ),
+		'update_item'           => __( 'Update Motorhome', 'mybooking-campers' ),
+		'view_item'             => __( 'View Motorhome', 'mybooking-campers' ),
+		'view_items'            => __( 'View Motorhomes', 'mybooking-campers' ),
+		'search_items'          => __( 'Search Motorhome', 'mybooking-campers' ),
 		'not_found'             => __( 'Not found', 'mybooking-campers' ),
 		'not_found_in_trash'    => __( 'Not found in Trash', 'mybooking-campers' ),
-		'featured_image'        => __( 'Camper Catalog Image', 'mybooking-campers' ),
-		'set_featured_image'    => __( 'Set camper image', 'mybooking-campers' ),
-		'remove_featured_image' => __( 'Remove camper image', 'mybooking-campers' ),
-		'use_featured_image'    => __( 'Use as camper image', 'mybooking-campers' ),
-		'insert_into_item'      => __( 'Insert into camper', 'mybooking-campers' ),
-		'uploaded_to_this_item' => __( 'Uploaded to this camper', 'mybooking-campers' ),
-		'items_list'            => __( 'Camper list', 'mybooking-campers' ),
-		'items_list_navigation' => __( 'Camper list navigation', 'mybooking-campers' ),
-		'filter_items_list'     => __( 'Filter camper list', 'mybooking-campers' ),
+		'featured_image'        => __( 'Motorhome Catalog Image', 'mybooking-campers' ),
+		'set_featured_image'    => __( 'Set Motorhome image', 'mybooking-campers' ),
+		'remove_featured_image' => __( 'Remove Motorhome image', 'mybooking-campers' ),
+		'use_featured_image'    => __( 'Use as Motorhome image', 'mybooking-campers' ),
+		'insert_into_item'      => __( 'Insert into Motorhome', 'mybooking-campers' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this Motorhome', 'mybooking-campers' ),
+		'items_list'            => __( 'Motorhome list', 'mybooking-campers' ),
+		'items_list_navigation' => __( 'Motorhome list navigation', 'mybooking-campers' ),
+		'filter_items_list'     => __( 'Filter Motorhomes List', 'mybooking-campers' ),
 	);
 	$rewrite = array(
-		'slug'                  => 'camper',
+		'slug'                  => __( 'motorhome', 'mybooking-campers' ),
 		'with_front'            => true,
 		'pages'                 => true,
 		'feeds'                 => true,
 	);
 	$args = array(
-		'label'                 => __( 'Campers', 'mybooking-campers' ),
-		'description'           => __( 'Mybooking Campers.', 'mybooking-campers' ),
+		'label'                 => __( 'Motorhomes', 'mybooking-campers' ),
+		'description'           => __( 'Mybooking Motorhomes.', 'mybooking-campers' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions' ),
 		'taxonomies'            => array( '' ),
@@ -79,9 +79,9 @@ function mybooking_camper_taxonomies() {
         'camper',
         array(
             'labels' => array(
-                'name' 					=> __( 'Camper category', 'mybooking-campers' ),
-                'add_new_item' 	=> __( 'Add camper category', 'mybooking-campers' ),
-                'new_item_name' => __( 'New camper category', 'mybooking-campers' )
+                'name' 					=> __( 'Motorhome category', 'mybooking-campers' ),
+                'add_new_item' 	=> __( 'Add Motorhome category', 'mybooking-campers' ),
+                'new_item_name' => __( 'New Motorhome category', 'mybooking-campers' )
             ),
             'show_ui' 					=> true,
 						'show_in_rest' 			=> true,

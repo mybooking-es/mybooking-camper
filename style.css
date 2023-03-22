@@ -400,6 +400,7 @@
   gap: 0.5rem;
   padding: 1rem 0 0 0;
   font-size: 1em;
+  flex-wrap: wrap;
 }
 
 .mybooking-campers_characteristic {
@@ -557,6 +558,7 @@
 
 .mybooking-campers_characteristic-icon {
   max-width: 30px!important; /* Must be important! to avoid Elementor responsive styles conflict */
+  min-width: 30px;
 }
 
 /* Calendar */
