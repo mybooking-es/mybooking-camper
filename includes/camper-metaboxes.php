@@ -849,7 +849,7 @@
   function add_camper_metabox_data( $camper_data_id ) {
 
     // Gallery
-    if ( $_POST['camper-details-gallery'] ){
+    if ( !empty($_POST['camper-details-gallery']) ){
 
       // Build array for saving post meta
       $gallery_data = array();
@@ -871,7 +871,7 @@
     }
 
     // Distribution images
-    if ( $_POST['camper-details-daily-distribution'] ) {
+    if ( !empty($_POST['camper-details-daily-distribution']) ) {
       $camper_camper_daily_distribution = sanitize_text_field( $_POST['camper-details-daily-distribution'] );
       update_post_meta( $camper_data_id, 'camper-details-daily-distribution', $camper_camper_daily_distribution );
     }
@@ -879,7 +879,7 @@
       delete_post_meta( $camper_data_id, 'camper-details-daily-distribution' );
     }
 
-    if ( $_POST['camper-details-nightly-distribution'] ) {
+    if ( !empty($_POST['camper-details-nightly-distribution']) ) {
       $camper_camper_nightly_distribution = sanitize_text_field( $_POST['camper-details-nightly-distribution'] );
       update_post_meta( $camper_data_id, 'camper-details-nightly-distribution', $camper_camper_nightly_distribution );
     }

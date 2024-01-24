@@ -28,7 +28,6 @@ get_header(); ?>
 				<?php } ?>
 
 				<!-- campers loop ------------------------------------------------------->
-
 				<div class="mybooking-campers_grid">
 
 					<?php if ( have_posts() ) : ?>

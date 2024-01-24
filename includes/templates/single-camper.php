@@ -133,7 +133,7 @@ get_header(); ?>
 
                   <?php if ( $camper_details_solar_panels == 'yes' ) {  ?>
                     <span class="mybooking-campers_characteristic">
-                      <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/solar_panel.svg'; ?>">
+                      <img class="mybooking-campers_characteristic-icon" src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/icons/solar-panels.svg'; ?>">
                       <?php echo esc_html_x( 'Yes', 'camper-single', 'mybooking-campers' ) ?>
                     </span>
                   <?php } ?>
