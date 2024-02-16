@@ -1,5 +1,11 @@
 # Mybooking Campers plugin Changelog
 
+## 1.0.6
+
+### Fixed
+- Daily image distribution was stored but no showed next time in the CPT edition because
+an error on fields names
+
 ## 1.0.5
 
 ### Added
