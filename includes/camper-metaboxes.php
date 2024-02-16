@@ -97,11 +97,11 @@
 
 
     <?php
-       // Nightly distribution
-       $camper_nightly_distribution = get_post_meta( $camper_data->ID, 'camper-details-nightly-distribution', true );
-       $camper_nightly_distribution_src = null;
-       if ( isset( $camper_nightly_distribution ) ) {
-        $camper_nightly_distribution_src =  wp_get_attachment_image_src( $camper_nightly_distribution,'medium' );
+       // Daily distribution
+       $camper_daily_distribution = get_post_meta( $camper_data->ID, 'camper-details-daily-distribution', true );
+       $camper_daily_distribution_src = null;
+       if ( isset( $camper_daily_distribution ) ) {
+        $camper_daily_distribution_src =  wp_get_attachment_image_src( $camper_daily_distribution,'medium' );
       }
     ?>
       <table class="form-table">
@@ -152,7 +152,10 @@
                           <?php if ( !empty( $camper_daily_distribution_src ) ) { ?>
                             style="display: none"
                           <?php } ?>
-                          onclick="open_media_uploader_single_image('#camper-details-daily-distribution-img', '#camper-details-daily-distribution', '#camper-details-daily-distribution-button', '#camper-details-daily-distribution-remove-button' );">+</button>
+                          onclick="open_media_uploader_single_image('#camper-details-daily-distribution-img', 
+                                                                    '#camper-details-daily-distribution', 
+                                                                    '#camper-details-daily-distribution-button', 
+                                                                    '#camper-details-daily-distribution-remove-button' );">+</button>
               </div>
             </td>
             <td style="width: 45%;">
@@ -163,11 +166,11 @@
       </table>
 
     <?php
-      // Daily distribution
-      $camper_daily_distribution = get_post_meta( $camper_data->ID, 'camper-details-daily-distribution', true );
-      $camper_daily_distribution_src = null;
-      if ( isset( $camper_daily_distribution ) ) {
-        $camper_daily_distribution_src =  wp_get_attachment_image_src( $camper_daily_distribution,'medium' );
+      // Nightly distribution
+      $camper_nightly_distribution = get_post_meta( $camper_data->ID, 'camper-details-nightly-distribution', true );
+      $camper_nightly_distribution_src = null;
+      if ( isset( $camper_nightly_distribution ) ) {
+        $camper_nightly_distribution_src =  wp_get_attachment_image_src( $camper_nightly_distribution,'medium' );
       }
     ?>
       <table class="form-table">
