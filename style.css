@@ -568,6 +568,7 @@
 
 .mb-card.mybooking-campers_product-form {
   background-color: var(--mb-lighter-color);
+  padding: 1rem;
 }
 
 /* Carousel */
